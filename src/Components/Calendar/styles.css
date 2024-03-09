@@ -1,0 +1,6 @@
+/* Add this to your CSS file or style block */
+.transition-all {
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+  }
