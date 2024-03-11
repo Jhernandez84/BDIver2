@@ -81,8 +81,8 @@ const Home = () => {
           <ModalUserData closeModal={closeModal} item={selectedItem}/>
         )}
           <div className="container-finder-summary-header">
-            <h1>gasdfa</h1>
-
+            <p>Listado de hermanos:</p>
+            <input type="text" placeholder="Buscar" onChange={()=>{1}} className="search-icon"/>
           </div>
 
 
