@@ -20,15 +20,14 @@
   text-align: center;
   background-color: #1f2937;
   border-radius: 25px 25px 0 0;
-
 }
 
-.container .container-finder-summary-header p{
+.container .container-finder-summary-header p {
   margin-left: 50px;
   color: white;
 }
 
-.container .container-finder-summary-header .search-icon{
+.container .container-finder-summary-header .search-icon {
   margin-top: 10px;
   margin-right: 50px;
   width: 60px;
@@ -41,13 +40,12 @@
   color: white;
 }
 
-.container .container-finder-summary-header .search-icon:hover{
+.container .container-finder-summary-header .search-icon:hover {
   width: 300px;
   border-color: white;
   border: dotted 1px;
   transition: 0.5s ease-in;
 }
-
 
 .container .header-container-finder {
   display: flex;
@@ -101,11 +99,32 @@ select {
 
 /* Aquí van las configuraciones de las tablas */
 
-
-
 .tbody-profile-row {
   cursor: pointer;
-  /* height: 50px; */
+  width: 100%;
+  display: flex; /* Add flex display to align content horizontally */
+  animation: slideIn 0.5s ease-out; /* Animation properties */
+  opacity: 1; /* Set initial opacity */
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%); /* Start from the right */
+    opacity: 0; /* Set initial opacity to 0 */
+  }
+  to {
+    transform: translateX(0); /* End at the original position */
+    opacity: 1; /* Set final opacity to 1 */
+  }
+}
+
+.tbody-profile-row td {
+  flex: 1;
+}
+
+tbody{
+  display: block;
+  width: 100%;
 }
 
 .tbody-profile-row:hover {
@@ -113,7 +132,7 @@ select {
 }
 
 .th-text {
-  width: 150px;
+  width: 200px;
 }
 
 .tbody-profile-image {
@@ -128,7 +147,7 @@ select {
 .modal-main-data-container {
   display: flex;
   flex-direction: column;
-  background-color:  #1f2937;
+  background-color: #1f2937;
 }
 
 .modal-personal-data-section {

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MyModalComponent from "./modal";
 import ModalUserData from "./modal2";
 import TableData from "./tableData";
@@ -19,11 +19,12 @@ const Home = () => {
     },
     {
       rut: "17388935",
-      nombre: "test",
+      nombre: "Daniela",
       foto: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      apellidos: "test",
-      telefono: "test",
-      edad: "test",
+      apellido_paterno: "Navarro",
+      apellido_materno: "Quevedo",
+      telefono: "978772331",
+      fec_nac: "1984-09-13",
     },
     {
       rut: "12096190",
@@ -74,59 +75,98 @@ const Home = () => {
     setModalOpen(false);
   };
 
+  const [valueToFind, setValueToFind] = useState("");
+  const [animateRows, setAnimateRows] = useState(true);
+  const [filtering, setFiltering] = useState(false);
+
+  useEffect(() => {
+    // Trigger animation once when the component mounts
+    setAnimateRows(true);
+  }, []);
+
+  const resetFiltering = () => {
+    setFiltering(false);
+  };
+
+  const handleValueToFind = (e) => {
+    getValueToFind(e.target.value);
+  };
+
+  const getValueToFind = (value) => {
+    console.log(value);
+    setValueToFind(value);
+  };
+
   return (
     <>
       <div className="container">
         {isModalOpen && (
-          <ModalUserData closeModal={closeModal} item={selectedItem}/>
+          <ModalUserData closeModal={closeModal} item={selectedItem} />
         )}
-          <div className="container-finder-summary-header">
-            <p>Listado de hermanos:</p>
-            <input type="text" placeholder="Buscar" onChange={()=>{1}} className="search-icon"/>
-          </div>
+        <div className="container-finder-summary-header">
+          <p>Listado de hermanos:</p>
+          <input
+            type="text"
+            value={valueToFind}
+            placeholder="Buscar"
+            onFocus={resetFiltering}
+            onChange={handleValueToFind}
+            className="search-icon"
+          />
+        </div>
 
-
-          <div className="container-table-2">
+        <div className="container-table-2">
           {/* <table> */}
-            <thead className="table-header">
-              <tr>
-                <th className="th-img">Foto</th>
-                <th className="th-text">Rut</th>
-                <th className="th-text">Nombre</th>
-                <th className="th-text">Apellidos</th>
-                <th className="th-text">Teléfono</th>
-                <th className="th-text">Fec. Nacimiento</th>
-              </tr>
-            </thead>
-            <tbody>
-              {BDdata.map((item, index) => (
-                <tr
-                  key={index}
-                  className="tbody-profile-row"
-                  onClick={() => {
-                    openModal(item);
-                  }}
-                >
-                  <td>
-                    <img
-                      className="tbody-profile-image"
-                      src={item.foto}
-                      alt=""
-                    />
-                  </td>
-                  <td>{item.rut}</td>
-                  <td>{item.nombre}</td>
-                  <td>
-                    {item.apellido_paterno} {item.apellido_materno}{" "}
-                  </td>
-                  <td>{item.telefono}</td>
-                  <td>{item.fec_nac}</td>
-                </tr>
-              ))}
-            </tbody>
+          <thead className="table-header">
+            <tr>
+              <th className="th-img">Foto</th>
+              <th className="th-text">Rut</th>
+              <th className="th-text">Nombre</th>
+              <th className="th-text">Apellidos</th>
+              <th className="th-text">Teléfono</th>
+              <th className="th-text">Fec. Nacimiento</th>
+            </tr>
+          </thead>
+          <tbody>
+            {BDdata.map((item, index) => {
+              if (
+                Object.values(item).some(
+                  (property) =>
+                    typeof property === "string" &&
+                    property.toLowerCase().includes(valueToFind.toLowerCase())
+                )
+              ) {
+                return (
+                  <tr
+                    key={index}
+                    className={`tbody-profile-row ${filtering ? 'animate' : ''}`}
+                    onClick={() => {
+                      openModal(item);
+                    }}
+                  >
+                    <td>
+                      <img
+                        className="tbody-profile-image"
+                        src={item.foto}
+                        alt=""
+                      />
+                    </td>
+                    <td>{item.rut}</td>
+                    <td>{item.nombre}</td>
+                    <td>
+                      {item.apellido_paterno} {item.apellido_materno}{" "}
+                    </td>
+                    <td>{item.telefono}</td>
+                    <td>{item.fec_nac}</td>
+                  </tr>
+                );
+                return null;
+              }
+            })}
+          </tbody>
           {/* </table> */}
         </div>
-        </div>
+      </div>
     </>
   );
 };

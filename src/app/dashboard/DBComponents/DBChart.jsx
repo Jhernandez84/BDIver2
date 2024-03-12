@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect } from 'react';
-import Chart from 'react-apexcharts';
+// import Chart from 'react-apexcharts';
 
 export const DBChart = ({ChartType, ChartData, ChartId, ChartWidth, ChartTitle}) => {
 

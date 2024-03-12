@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import MyModal from "./modal";
 import "./styles.css";
 
-const TableData = ({setModalOpen}) => {
+const TableData = ({setModalOpen, tData, filter}) => {
 
   const openModal = ({ item }) => {
     console.log(item.nombre);
@@ -70,7 +70,9 @@ const TableData = ({setModalOpen}) => {
   return (
     <>
       <tbody>
-        {BDdata.map((item, index) => (
+        {BDdata.map((item, index) => {
+          
+          return(
           <tr
             key={index}
             className="tbody-profile-row"
@@ -85,7 +87,8 @@ const TableData = ({setModalOpen}) => {
             <td>{item.telefono}</td>
             <td>{item.edad}</td>
           </tr>
-        ))}
+        )}
+        )}
       </tbody>
     </>
   );
