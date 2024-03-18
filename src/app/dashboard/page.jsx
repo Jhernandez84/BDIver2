@@ -8,6 +8,8 @@ import DBComponents from "./DBComponents/DBComponents";
 import UserTable1 from "@/Components/UserTable/UserTable2";
 import DBChart from "./DBComponents/DBChart";
 import TableData from "@/Components/TableData/TableData";
+import CardChartComponent from "@/Components/CardsCharts/CardChartComponent";
+import "./styles.css";
 
 const Dashboard = () => {
   const AppointedDates = [
@@ -30,45 +32,46 @@ const Dashboard = () => {
   ];
 
   return (
-    <div
-      className="grid grid-rows h-[95%] bg-white text-gray-700 dark:bg-gray-600 "
-      style={{ gridTemplateRows: "45% 50%" }}
-    >
-      <div
-        className="grid grid-cols justify-stretch mt-2"
-        style={{ gridTemplateColumns: "25% 37% 37%" }}
-      >
-        <div className="justify-self-center dark:text-white flex-col">
-          <CalendarMonthView AppointedDates={AppointedDates} />
+    <div className="dashboard-container ">
+      {/* text-gray-700 dark:bg-gray-600  */}
+      <section className="dashboard-chart-containers">
+        <div className="dashboard-chart-containers-cols">
+          <div>
+            <CardChartComponent
+              id={1}
+              header={"IverRegiones"}
+              text={"50"}
+              text2={"Var % en últimos 3 días"}
+            />
+          </div>
+          <div>
+            <CardChartComponent
+              id={2}
+              header={"Jóvenes"}
+              text={"950"}
+              text2={"var var var"}
+            />
+          </div>
         </div>
-        <div className="justify-self-left bg-white text-gray-700 dark:bg-gray-700 rounded-lg">
-          <DBChart
-            ChartType="bar"
-            ChartData={AppointedDates}
-            ChartId="Bars"
-            ChartTitle={"Citas de la semana"}
-          />
+        <div className="dashboard-chart-containers-cols">
+          <div>
+            <CardChartComponent
+              id={3}
+              header={"Misiones"}
+              text={"15"}
+              text2={"var var var"}
+            />
+          </div>
+          <div>
+            <CardChartComponent
+              id={4}
+              header={"Jóvenes"}
+              text={"950"}
+              text2={"var var var"}
+            />
+          </div>
         </div>
-        <div className="justify-self-left bg-white text-gray-700 dark:bg-gray-700 rounded-lg ml-2">
-          <DBChart
-            ChartType="line"
-            ChartData={AppointedDates}
-            ChartId="Lines"
-            ChartTitle={"Evolución citas"}
-          />
-        </div>
-      </div>
-      <div
-        className="grid grid-cols-2 bg-white text-gray-700 dark:bg-gray-600"
-        style={{ gridTemplateColumns: "25% 75%" }}
-      >
-        <div className="justify-self-center mt-2  ">
-          <TableData />
-        </div>
-        <div className="justify-self-left flex-col mt-2 h-[100%] text-white mr-3">
-          <CalendarDayView />
-        </div>
-      </div>
+      </section>
     </div>
   );
 };

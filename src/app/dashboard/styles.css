@@ -1,0 +1,9 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-container .dashboard-chart-containers {
+  display: flex;
+  flex-direction: row;
+}
