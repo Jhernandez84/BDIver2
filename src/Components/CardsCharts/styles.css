@@ -11,17 +11,17 @@
   top: 0;
   left: 0;
   display: block;
-  border: solid 1px;
+  border: solid 0.1px;
   border-color: aquamarine;
   border-radius: 20px;
   margin: 5px;
+  background-color: #1f2937;
 }
 
 .cc-container .cc-cont-border {
   margin: 5px;
-  border: solid 1px;
-  border-color: aquamarine;
   border-radius: 16px;
+  background-color: #374151;  
   padding: 5px;
 }
 
@@ -40,6 +40,7 @@
 }
 
 .cc-cont-header {
+  cursor: pointer;
   font-size: small;
   margin-bottom: 5px;
 }

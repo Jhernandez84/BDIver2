@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import ApexCharts from "apexcharts";
 
-const ChartBuilder = ({ id }) => {
+const ChartBuilder = ({ id, advance }) => {
   console.log(id);
   useEffect(() => {
     const options = {
@@ -9,7 +9,7 @@ const ChartBuilder = ({ id }) => {
         height: 150,
         type: "radialBar",
       },
-      series: [50],
+      series: [advance],
       colors: ["#20E647"],
       plotOptions: {
         radialBar: {

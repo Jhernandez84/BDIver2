@@ -39,6 +39,7 @@ const Dashboard = () => {
           <div>
             <CardChartComponent
               id={1}
+              CardChartData={"25"}
               header={"IverRegiones"}
               text={"50"}
               text2={"Var % en últimos 3 días"}
@@ -47,6 +48,7 @@ const Dashboard = () => {
           <div>
             <CardChartComponent
               id={2}
+              CardChartData={"15"}
               header={"Jóvenes"}
               text={"950"}
               text2={"var var var"}
@@ -57,6 +59,7 @@ const Dashboard = () => {
           <div>
             <CardChartComponent
               id={3}
+              CardChartData={"45"}
               header={"Misiones"}
               text={"15"}
               text2={"var var var"}
@@ -65,6 +68,7 @@ const Dashboard = () => {
           <div>
             <CardChartComponent
               id={4}
+              CardChartData={"65"}
               header={"Jóvenes"}
               text={"950"}
               text2={"var var var"}

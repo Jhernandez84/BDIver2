@@ -41,7 +41,9 @@ const generateCalendar = (month, year) => {
       day,
       week: getWeek(new Date(year, month, day)),
       isPrevMonth: false,
-      fulldate: `${year}-${month < 10 ? '0' : ''}${month + 1}-${day < 10 ? '0' : ''}${day}`,
+      fulldate: `${year}-${month < 10 ? "0" : ""}${month + 1}-${
+        day < 10 ? "0" : ""
+      }${day}`,
     });
   }
 
@@ -64,8 +66,11 @@ const getMonthName = (monthNumber) => {
   return monthDate.toLocaleString("es-CL", { month: "long" });
 };
 
-const CalendarMonthView = ({ month = new Date().getMonth(), year = new Date().getFullYear(), Fscreen }) => {
-
+const CalendarMonthView = ({
+  month = new Date().getMonth(),
+  year = new Date().getFullYear(),
+  Fscreen,
+}) => {
   const getCurrentDate = () => {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -73,7 +78,9 @@ const CalendarMonthView = ({ month = new Date().getMonth(), year = new Date().ge
     const day = currentDate.getDate();
 
     // Format the date as a string (optional)
-    const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+    const formattedDate = `${year}-${month < 10 ? "0" : ""}${month}-${
+      day < 10 ? "0" : ""
+    }${day}`;
     // console.log(formattedDate)
     return formattedDate;
   };
@@ -93,7 +100,7 @@ const CalendarMonthView = ({ month = new Date().getMonth(), year = new Date().ge
   const initialState = () => {
     setMonthCalendar(month);
     setYearCalendar(year);
-  }
+  };
 
   const openModal = () => {
     setModalOpen(true);
@@ -142,38 +149,44 @@ const CalendarMonthView = ({ month = new Date().getMonth(), year = new Date().ge
       {isModalOpen && (
         <MyModal onClose={closeModal} SelectedDate={SelectedDate} />
       )}
-      <div className="dark:bg-gray-700 rounded-md shadow-xl w-[320px] h-[312px]">
-        <div className="grid grid-rows flex justify-center content-center p-2">
-          <div className="text-center p-2 dark:bg-gray-800 rounded-t-md">
-            <div className="grid grid-cols-2 justify-center content-center space-x-4"
-              style={{ gridTemplateColumns: '50% 50%' }}>
-              <div className="grid grid-cols-3" style={{ gridTemplateColumns: '20% 60% 20%' }}>
-                <div className="text-md dark:hover:cursor-pointer dark:hover:bg-teal-600 rounded"
-                  onClick={() => setMonthCalendar(monthCalendar - 1)}>
-                  <h2>{`<`}</h2>
-                </div>
-                <h2
-                  className="text-md dark:hover:cursor-pointer dark:hover:bg-teal-600 rounded"
-                  onClick={() => HandlerCalendarView("month")}
-                >{`${getMonthName(monthCalendar + 1)}`}</h2>
-                <div className="text-md dark:hover:cursor-pointer dark:hover:bg-teal-600 rounded"
-                  onClick={() => setMonthCalendar(monthCalendar + 1)}>
-                  <h2>{`>`}</h2>
-                </div>
+      <div className="cdr-main-container">
+        <div className="cdr-secondary-container">
+          <div className="cdr-header-container">
+            <div className="cdr-header-container-left">
+              <div
+                className="cdr-selector"
+                onClick={() => setMonthCalendar(monthCalendar - 1)}
+              >
+                <h2>{`<`}</h2>
               </div>
-              <div className="grid grid-cols-3" style={{ gridTemplateColumns: '20% 60% 20%' }}>
-                <div className="text-md dark:hover:cursor-pointer dark:hover:bg-teal-600 rounded"
-                  onClick={() => setYearCalendar(year - 1)}>
-                  <h2>{`<`}</h2>
-                </div>
-                <h2
-                  className="text-md dark:hover:cursor-pointer dark:hover:bg-teal-600 rounded"
-                  onClick={() => HandlerCalendarView("year")}
-                >{`${yearCalendar}`}</h2>
-                <div className="text-md dark:hover:cursor-pointer dark:hover:bg-teal-600 rounded"
-                  onClick={() => setYearCalendar(year + 1)}>
-                  <h2>{`>`}</h2>
-                </div>
+              <h2
+                className="cdr-selector"
+                onClick={() => HandlerCalendarView("month")}
+              >{`${getMonthName(monthCalendar + 1)}`}</h2>
+              <div
+                className="cdr-selector"
+                onClick={() => setMonthCalendar(monthCalendar + 1)}
+              >
+                <h2>{`>`}</h2>
+              </div>
+            </div>
+
+            <div className="cdr-header-container-right">
+              <div
+                className="cdr-selector"
+                onClick={() => setYearCalendar(year - 1)}
+              >
+                <h2>{`<`}</h2>
+              </div>
+              <h2
+                className="cdr-selector"
+                onClick={() => HandlerCalendarView("year")}
+              >{`${yearCalendar}`}</h2>
+              <div
+                className="cdr-selector"
+                onClick={() => setYearCalendar(year + 1)}
+              >
+                <h2>{`>`}</h2>
               </div>
             </div>
           </div>
@@ -214,41 +227,38 @@ const CalendarMonthView = ({ month = new Date().getMonth(), year = new Date().ge
             []
           )}
           {calendarView == "default" ? (
-            <table className="dark:bg-gray-700 rounded shadow-xl self-center">
-              <thead className="">
-                <tr className="ligth:white dark:gray-800 h-8 text-gray-500 shadow">
-                  <th className="dark:hover:cursor-default w-12 p-1">Sem</th>
-                  <th className="dark:hover:cursor-default w-8 p-1">Lun</th>
-                  <th className="dark:hover:cursor-default w-8 p-1">Mar</th>
-                  <th className="dark:hover:cursor-default w-8 p-1">Mié</th>
-                  <th className="dark:hover:cursor-default w-8 p-1">Jue</th>
-                  <th className="dark:hover:cursor-default w-8 p-1">Vie</th>
-                  <th className="dark:hover:cursor-default w-8 p-1">Sáb</th>
-                  <th className="dark:hover:cursor-default w-8 p-1">Dom</th>
+            <table className="">
+              <thead className="cdr-header-days">
+                <tr>
+                  <th>Sem</th>
+                  <th>Lun</th>
+                  <th>Mar</th>
+                  <th>Mié</th>
+                  <th>Jue</th>
+                  <th>Vie</th>
+                  <th>Sáb</th>
+                  <th>Dom</th>
                 </tr>
               </thead>
               <tbody>
                 {Array.from({ length: 6 }).map((_, weekIndex) => (
-                  <tr key={weekIndex} className="text-xs">
+                  <tr key={weekIndex}>
                     {Array.from({ length: 8 }).map((_, dayIndex) => {
                       const dataIndex = weekIndex * 7 + dayIndex;
                       const dayInfo = calendar[dataIndex];
                       if (dayIndex === 0) {
                         return (
-                          <td
-                            className="text-xs text-center dark:hover:cursor-default p-2 text-rose-400"
-                            key={dayIndex}
-                          >
+                          <td key={dayIndex} className="cdr-week-number">
                             {dayInfo ? dayInfo.week : ""}
                           </td>
                         );
                       }
-                      if (dayInfo?.isPrevMonth === true || dayInfo?.isNextMonth === true) {
+                      if (
+                        dayInfo?.isPrevMonth === true ||
+                        dayInfo?.isNextMonth === true
+                      ) {
                         return (
-                          <td
-                            className="text-center text-base cursor-not-allowed dark:text-gray-500 rounded"
-                            key={dayIndex}
-                          >
+                          <td className="cdr-last-next-month" key={dayIndex}>
                             {dayInfo ? dayInfo.day : ""}
                           </td>
                         );
@@ -257,7 +267,7 @@ const CalendarMonthView = ({ month = new Date().getMonth(), year = new Date().ge
                           return (
                             <td
                               onClick={() => dateHandler(dayInfo.fulldate)}
-                              className="text-center text-base cursor-pointer dark:bg-teal-600 dark:hover:bg-teal-600 rounded-lg"
+                              className="cdr-current-day"
                               key={dayIndex}
                             >
                               {dayInfo ? dayInfo.day : ""}
@@ -267,7 +277,7 @@ const CalendarMonthView = ({ month = new Date().getMonth(), year = new Date().ge
                           return (
                             <td
                               onClick={() => dateHandler(dayInfo.fulldate)}
-                              className="text-center text-base cursor-pointer dark:hover:bg-teal-600 rounded"
+                              className="cdr-current-month"
                               key={dayIndex}
                             >
                               {dayInfo ? dayInfo.day : ""}
@@ -283,10 +293,16 @@ const CalendarMonthView = ({ month = new Date().getMonth(), year = new Date().ge
           ) : (
             []
           )}
-          <div className="dark:hover:bg-teal-600 dark:hover:cursor-pointer text-center p-1 dark:bg-gray-800 rounded-b-md"
-            onClick={() => { initialState(); HandlerCalendarView('default') }}
-          >
-            Hoy
+          <div className="cdr-footer-container">
+            <div
+              className="btn-cdr-current-day"
+              onClick={() => {
+                initialState();
+                HandlerCalendarView("default");
+              }}
+            >
+              Hoy
+            </div>
           </div>
         </div>
       </div>

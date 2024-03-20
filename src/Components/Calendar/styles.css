@@ -1,6 +1,106 @@
 /* Add this to your CSS file or style block */
-.transition-all {
-    transition-property: all;
-    transition-duration: 0.3s;
-    transition-timing-function: ease;
-  }
+/* .transition-all {
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+} */
+
+.cdr-main-container {
+  border: solid 1px;
+  border-color: aquamarine;
+  border-radius: 25px;
+  padding: 10px;
+  background-color: #0f172a;
+  width: 280px;
+  height: 285px;
+}
+
+.cdr-secondary-container {
+  background-color: #1e293b;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.cdr-header-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.cdr-header-container-left,
+.cdr-header-container-right {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+}
+
+.cdr-selector {
+  display: flex;
+  flex-direction: column;
+  font-size: medium;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+}
+
+p {
+  font-size: x-small;
+}
+
+table {
+  height: 160px;
+}
+
+.cdr-header-days tr {
+  background-color: #0f172a; /* Consistent background color */
+  border-collapse: collapse; /* Remove any default spacing or borders */
+  border-spacing: 0; /* Ensures no space between cells */
+}
+
+table tbody tr td {
+  text-align: center;
+  font-size: smaller;
+  height: 20px;
+}
+
+.cdr-week-number {
+  font-size: xx-small;
+  color: red;
+}
+
+.cdr-last-next-month {
+  cursor: not-allowed;
+  color: #0f172a;
+}
+
+.cdr-current-month {
+  cursor: pointer;
+}
+
+.cdr-current-day {
+  cursor: pointer;
+  border-bottom: solid 1px;
+  border-top: solid 1px;
+  border-color: aquamarine;
+  color: aquamarine;
+  /* background-color: aquamarine; */
+  border-radius: 25px;
+}
+
+.cdr-footer-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-cdr-current-day{
+  cursor:pointer;
+  border-color: aquamarine;
+  border: solid 1px;
+  border-radius: 25px;
+  padding: 5px;
+  text-align: center;
+  background-color: rgb(141, 231, 201);
+  color: #0f172a;
+  font-weight: bold;
+  width: 50%;
+}
