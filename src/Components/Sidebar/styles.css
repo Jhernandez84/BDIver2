@@ -1,24 +1,25 @@
+html,
+body,
+#root,
+.parent-container {
+  height: 100%;
+}
+
 .main-container {
   display: flex;
   flex-direction: row;
   position: relative;
-  flex-wrap: wrap;  
-  height: fit-content;
+  flex-wrap: wrap;
+  height: 100vh;
 }
 
 .content-container {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center;  */
   padding: 10px;
-  margin-top: 10px;
   margin-left: 80px;
   position: absolute;
-  width: 90vw;
-  height: 90vh;
-  border-color: #0d9488;
-  border: solid 1px;
+  height: 100%;
 }
 
 .side-bar {
@@ -26,18 +27,52 @@
   flex-direction: column;
   justify-content: space-between;
   margin-left: 5px;
+  margin-bottom: 50px;
+  margin-top: 25px;
   padding-top: 5%;
-  padding-bottom: 20%;
-  gap: 25px;
-  height: 100%;
+  gap: 20px;
+  /* height: 100%; */
   border-radius: 15px;
   background-color: #1f2937;
+}
+
+.sidebar-logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar-logo-section img {
+  margin-top: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+.sidebar-account-settings {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: solid 1px;
+  padding-top: 25px;
+}
+
+.sidebar-account-settings img{
+  margin-bottom: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+.sidebar-account-settings-drkMode{
+  margin-bottom: 20px;
+  border-radius: 50px;
 }
 
 .sidebar-content-container {
   display: flex;
   flex-direction: column;
-  /* padding-left: 3px; */
 }
 
 .sidebar-link-content {
@@ -52,18 +87,18 @@
   flex-direction: row;
   align-items: center;
   background-color: #1f2937;
-
 }
 
 .collapsed-sidebar .sidebar-content-text {
   visibility: hidden;
-  transition: visibility 0.1s ease; /* Optional: Add a smooth transition effect */
+  /* transition: visibility 0.1s ease; Optional: Add a smooth transition effect */
   text-decoration: none;
 }
 
 .expanded-sidebar:hover .sidebar-content-text {
   visibility: visible;
   transition: visibility 0.5s ease; /* Optional: Add a smooth transition effect */
+  text-decoration: none;
 }
 
 .sidebar-content-icon {
@@ -78,13 +113,11 @@
   background-color: #1f2937;
 }
 
-
 .collapsed-sidebar {
   width: 70px;
   overflow: hidden;
   transition: width 0.3s ease; /* Add smooth transition */
   background-color: #1f2937;
-
 }
 
 .expanded-sidebar {
@@ -98,7 +131,6 @@
 .sidebar-content-container {
   position: relative;
   background-color: #1f2937;
-
 }
 
 .sidebar-content-text {
@@ -109,9 +141,8 @@
   background-color: #1f2937;
 }
 
-Link{
+Link {
   text-decoration: none;
-
 }
 
 .sidebar-content-text::before {
@@ -138,8 +169,7 @@ Link{
   display: none;
 }
 
-.sidebar-link-submenu-content{
+.sidebar-link-submenu-content {
   display: flex;
   flex-direction: column;
-
 }

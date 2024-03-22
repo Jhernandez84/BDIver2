@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { CalendarPicker } from "@/Components/Calendar/Calendar";
 import UserTable from "@/Components/UserTable/UserTable";
 import CalendarWeekView from "@/Components/Calendar/CalendarWeekView";
 import CalendarMonthView from "@/Components/Calendar/CalendarMonthView";

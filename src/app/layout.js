@@ -6,7 +6,7 @@ import "./globals.css";
 import NavBar from "@/Components/NavBar/NavBar";
 import FooterPage from "@/Components/Footer/Footer";
 import SideBarComponent from "@/Components/Sidebar/SideBar";
-import '../Components/Sidebar/styles.css'
+import "../Components/Sidebar/styles.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,18 +29,10 @@ export default function RootLayout({ children }) {
   return (
     <html>
       <body>
-        <header>
-        </header>
+        <header></header>
         {User.userProfile == "Admin" ? (
-          <main className="">
-            <div>
-              {/* <NavBar /> */}
-            </div>
-            <div>
-              <div className="">
-                  <SideBarComponent children={children}/>
-              </div>
-            </div>
+          <main className="main-container">
+            <SideBarComponent children={children} />
           </main>
         ) : (
           <>
