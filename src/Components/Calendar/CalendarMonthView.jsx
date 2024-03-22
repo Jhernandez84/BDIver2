@@ -157,17 +157,17 @@ const CalendarMonthView = ({
                 className="cdr-selector"
                 onClick={() => setMonthCalendar(monthCalendar - 1)}
               >
-                <h2>{`<`}</h2>
+                <p>{`<`}</p>
               </div>
-              <h2
+              <p
                 className="cdr-selector"
                 onClick={() => HandlerCalendarView("month")}
-              >{`${getMonthName(monthCalendar + 1)}`}</h2>
+              >{`${getMonthName(monthCalendar + 1)}`}</p>
               <div
                 className="cdr-selector"
                 onClick={() => setMonthCalendar(monthCalendar + 1)}
               >
-                <h2>{`>`}</h2>
+                <p>{`>`}</p>
               </div>
             </div>
 
@@ -176,17 +176,17 @@ const CalendarMonthView = ({
                 className="cdr-selector"
                 onClick={() => setYearCalendar(year - 1)}
               >
-                <h2>{`<`}</h2>
+                <p>{`<`}</p>
               </div>
-              <h2
+              <p
                 className="cdr-selector"
                 onClick={() => HandlerCalendarView("year")}
-              >{`${yearCalendar}`}</h2>
+              >{`${yearCalendar}`}</p>
               <div
                 className="cdr-selector"
                 onClick={() => setYearCalendar(year + 1)}
               >
-                <h2>{`>`}</h2>
+                <p>{`>`}</p>
               </div>
             </div>
           </div>
@@ -301,7 +301,7 @@ const CalendarMonthView = ({
                 HandlerCalendarView("default");
               }}
             >
-              Hoy
+              Hoy: {getCurrentDate()} 
             </div>
           </div>
         </div>

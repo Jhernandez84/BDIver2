@@ -6,11 +6,12 @@ import CalendarWeekView from "@/Components/Calendar/CalendarWeekView";
 import CalendarMonthView from "@/Components/Calendar/CalendarMonthView";
 import CalendarYearView from "@/Components/Calendar/CalendarYearView";
 import CalendarHeaders from "@/Components/Calendar/CalendarHeaders";
-import DateInput from "@/Components/Calendar/CdrTest";
+import CalendarAndSummary from "@/Components/Calendar/CalendarAndSummary";
 
 const Calendar = () => {
   const [calendarView, setCalendarView] = useState("MonthView");
-  return <CalendarMonthView />;
+  // return <CalendarMonthView />;
+  return <CalendarAndSummary />;
   // switch (calendarView) {
   //   case "WeekView":
   //     return (
