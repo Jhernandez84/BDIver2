@@ -1,7 +1,7 @@
 // components/Calendar.js
 import React from "react";
 import { useState } from "react";
-import MyModal from "./CalendarModal";
+import MyModal from ".././CalendarModal";
 // import "./styles.css";
 
 const daysInMonth = (month, year) => {
@@ -66,11 +66,17 @@ const getMonthName = (monthNumber) => {
   return monthDate.toLocaleString("es-CL", { month: "long" });
 };
 
+// Main function for the calendar view
+// Main function for the calendar view
+
 const CalendarMonthView = ({
   month = new Date().getMonth(),
   year = new Date().getFullYear(),
-  Fscreen,
+  ShowBorder,
+  ShowTodayBtn,
+  ShowWeekNumber,
 }) => {
+  console.log(ShowTodayBtn);
   const getCurrentDate = () => {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -149,7 +155,11 @@ const CalendarMonthView = ({
       {isModalOpen && (
         <MyModal onClose={closeModal} SelectedDate={SelectedDate} />
       )}
-      <div className="cdr-main-container">
+      <div
+        className={
+          ShowBorder ? "cdr-main-container" : "cdr-main-container-w-border"
+        }
+      >
         <div className="cdr-secondary-container">
           <div className="cdr-header-container">
             <div className="cdr-header-container-left">
@@ -293,17 +303,21 @@ const CalendarMonthView = ({
           ) : (
             []
           )}
-          <div className="cdr-footer-container">
-            <div
-              className="btn-cdr-current-day"
-              onClick={() => {
-                initialState();
-                HandlerCalendarView("default");
-              }}
-            >
-              Hoy: {getCurrentDate()} 
+          {ShowTodayBtn === true ? (
+            <div className="cdr-footer-container">
+              <div
+                className="btn-cdr-current-day"
+                onClick={() => {
+                  initialState();
+                  HandlerCalendarView("default");
+                }}
+              >
+                Hoy: {getCurrentDate()}
+              </div>
             </div>
-          </div>
+          ) : (
+            []
+          )}
         </div>
       </div>
     </>

@@ -5,7 +5,7 @@ import CalendarWeekView from "@/Components/Calendar/CalendarWeekView";
 import CalendarMonthView from "@/Components/Calendar/CalendarMonthView";
 import CalendarYearView from "@/Components/Calendar/CalendarYearView";
 import CalendarHeaders from "@/Components/Calendar/CalendarHeaders";
-import CalendarAndSummary from "@/Components/Calendar/CalendarAndSummary";
+import CalendarAndSummary from "@/Components/CdrAndSummary/CalendarAndSummary";
 
 const Calendar = () => {
   const [calendarView, setCalendarView] = useState("MonthView");

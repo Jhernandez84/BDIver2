@@ -1,25 +1,44 @@
 import React from "react";
+import './styles.css'
+
+import {
+  HiChartPie,
+  HiHome,
+  HiUserGroup,
+  HiTicket,
+  HiCalendar,
+  HiAdjustments,
+  HiUser,
+  HiUsers,
+  HiQuestionMarkCircle,
+  HiSun,
+  HiMoon,
+  HiAcademicCap,
+} from "react-icons/hi";
 
 const CalendarSummary = () => {
+
+  const iconSize = "25px"
+
   const Data = [
     {
-      icon: "Icon",
+      icon: <HiUserGroup style={{ fontSize: iconSize }}  />,
       type: "Redes Matrimonios",
       time: "22:00",
       location: "Talcahuano",
     },
     {
-      icon: "Icon",
+      icon: <HiAcademicCap style={{ fontSize: iconSize }}  />,
       type: "Prediacion",
       time: "19:00",
       location: "San Clemente",
     },
-    { icon: "Icon", type: "Otros", time: "20:00", location: "Templo Central" },
-    { icon: "Icon", type: "Otros", time: "20:00", location: "Templo Central" },
-    { icon: "Icon", type: "Otros", time: "20:00", location: "Templo Central" },
-    { icon: "Icon", type: "Otros", time: "20:00", location: "Templo Central" },
-    { icon: "Icon", type: "Otros", time: "20:00", location: "Templo Central" },
-    { icon: "Icon", type: "Otros", time: "20:00", location: "Templo Central" },
+    { icon: <HiChartPie style={{ fontSize: iconSize }}  />, type: "Otros", time: "20:00", location: "Templo Central" },
+    { icon: <HiChartPie style={{ fontSize: iconSize }}  />, type: "Otros", time: "20:00", location: "Templo Central" },
+    { icon: <HiChartPie style={{ fontSize: iconSize }}  />, type: "Otros", time: "20:00", location: "Templo Central" },
+    { icon: <HiChartPie style={{ fontSize: iconSize }}  />, type: "Otros", time: "20:00", location: "Templo Central" },
+    { icon: <HiChartPie style={{ fontSize: iconSize }}  />, type: "Otros", time: "20:00", location: "Templo Central" },
+    { icon: <HiChartPie style={{ fontSize: iconSize }}  />, type: "Otros", time: "20:00", location: "Templo Central" },
   ];
 
   return (

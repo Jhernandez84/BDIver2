@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import DBChart from "../dashboard/DBComponents/DBChart";
+import DBChart from "../../Components/Charts/ChartComponent";
 import CalendarDayView from "@/Components/Calendar/CalendarDayView";
 
 const TestCharts = () => {
