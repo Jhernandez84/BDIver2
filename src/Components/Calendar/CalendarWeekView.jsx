@@ -5,7 +5,7 @@ import CalendarMonthView from "./CalendarMonthView";
 import CalendarHeaders from "./CalendarHeaders";
 import CalendarWeekSummary from "./CalendarWeekSummary";
 import CalendarWeekSummaryChart from "./CalendarWeekSummaryChart";
-import TableData from "../TableData/TableData";
+import TableData from "../Tables/TableData";
 import * as HiIcons from "react-icons/hi";
 
 const CalendarWeekView = () => {

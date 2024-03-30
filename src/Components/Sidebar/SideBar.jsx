@@ -93,7 +93,7 @@ const SideBarComponent = ({ children }) => {
     {
       SBIcon: <HiUsers style={{ fontSize: iconSize }} />,
       SBMenu: "Usuarios",
-      SBRout: "/",
+      SBRout: "/pagebuilder",
     },
     {
       SBIcon: <HiQuestionMarkCircle style={{ fontSize: iconSize }} />,

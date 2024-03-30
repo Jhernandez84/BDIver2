@@ -6,7 +6,7 @@ import SimpleCard from "@/Components/SimpleCard/SimpleCard";
 import UserTable1 from "@/Components/UserTable/UserTable2";
 import UserTable from "@/Components/UserTable/UserTable";
 import DBChart from "../../Components/Charts/ChartComponent";
-import TableData from "@/Components/TableData/TableData";
+import TableData from "@/Components/Tables/TableData";
 import CardChartComponent from "@/Components/CardsCharts/CardChartComponent";
 import CalendarAndSummary from "@/Components/CdrAndSummary/CalendarAndSummary";
 import UserCardsComp from "@/Components/Users/UserCards/UserCardsComp";
