@@ -8,7 +8,10 @@ const TestCharts = () => {
   return (
     <>
       <div className="justify-self-center p-4 m-4 text-white">
-        <CalendarDayView />
+        <section>
+        <h1>main settings menu</h1>
+
+        </section>
       </div>
       <div className="justify-self-center p-4 m-4">
         {/* <DBChart ChartType="area" /> */}

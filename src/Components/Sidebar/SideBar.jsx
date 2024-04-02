@@ -46,7 +46,7 @@ const SideBarComponent = ({ children }) => {
     {
       SBIcon: <HiUserGroup style={{ fontSize: iconSize }} />,
       SBMenu: "Iglesia",
-      SBRout: "/home",
+      SBRout: "/usersview",
       SBSMContent: [
         {
           SBIcon: <HiUserGroup style={{ fontSize: iconSize }} />,
@@ -84,11 +84,6 @@ const SideBarComponent = ({ children }) => {
       SBIcon: <HiAdjustments style={{ fontSize: iconSize }} />,
       SBMenu: "Mantenedor",
       SBRout: "/usersettings",
-    },
-    {
-      SBIcon: <HiUser style={{ fontSize: iconSize }} />,
-      SBMenu: "Cuenta",
-      SBRout: "/account",
     },
     {
       SBIcon: <HiUsers style={{ fontSize: iconSize }} />,
