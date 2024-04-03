@@ -6,14 +6,16 @@ import { useState } from "react";
 const LGTableModal = ({ closeModal, item }) => {
   const {
     id,
-    name,
-    apellidos,
-    telefono,
-    edad,
+    Rut,
+    Nombres,
+    ApellidoPaterno,
+    ApellidoMaterno,
+    NumeroContacto,
+    FechaNacimiento,
     imageUrl,
-    apellido_paterno,
-    apellido_materno,
-    fec_nac,
+    EstadoCivil,
+    EstadoIglesia,
+    EstadoActualizacion,
   } = item;
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -30,11 +32,6 @@ const LGTableModal = ({ closeModal, item }) => {
   const [selectedOptionRedes, setSelectedOptionRedes] = useState("");
   const [selectedOptionGrupoEtario, setSelectedOptionGrupoEtario] = useState("");
   const [selectedOptionLugarOrigen, setSelectedOptionLugarOrigen] = useState("");
-
-
-  const handleSelectChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
 
   const handleSelectChangeEstadoCivil = (event) => {
     setSelectedOptionEstadoCivil(event.target.value);
@@ -156,7 +153,7 @@ const LGTableModal = ({ closeModal, item }) => {
                 type="text"
                 id="name"
                 className="input-name"
-                placeholder={name}
+                placeholder={Nombres}
               />
             </div>
             <div>
@@ -167,7 +164,7 @@ const LGTableModal = ({ closeModal, item }) => {
                 type="text"
                 id="name"
                 className="input-name"
-                placeholder={apellido_paterno}
+                placeholder={ApellidoPaterno}
               />
             </div>
           </div>
@@ -180,7 +177,7 @@ const LGTableModal = ({ closeModal, item }) => {
                 type="text"
                 id="name"
                 className="input-name"
-                placeholder={apellido_materno}
+                placeholder={ApellidoMaterno}
                 // value={apellido_materno}
               />
             </div>
@@ -192,14 +189,14 @@ const LGTableModal = ({ closeModal, item }) => {
                 type="date"
                 id="name"
                 className="input-name"
-                placeholder={fec_nac}
+                placeholder={FechaNacimiento}
               />
             </div>
           </div>
         </div>
         <div className="modal-personal-data-section-left-col">
           <div className="input-personal-data-img">
-            <img src={imageUrl} alt={name} />
+            <img src={imageUrl} alt={Nombres} />
           </div>
         </div>
       </div>
@@ -216,14 +213,14 @@ const LGTableModal = ({ closeModal, item }) => {
           type="text"
           id="name"
           className="input-name"
-          placeholder={telefono}
+          placeholder={NumeroContacto}
         />
       </div>
       <div>
         <label htmlFor="" className="input-label">
           Dirección
         </label>
-        <input type="text" id="name" className="input-name" />
+        <input type="text" id="name" className="input-name"/>
       </div>
       <div>
         <label htmlFor="" className="input-label">
@@ -548,7 +545,7 @@ const LGTableModal = ({ closeModal, item }) => {
           &times;
         </span>
         <section className="modal-header-section">
-          Editando perfil de {id} - {name} {apellido_paterno} {apellido_materno}
+          Editando perfil de {Rut} - {Nombres} {ApellidoPaterno} {ApellidoMaterno}
         </section>
         <section className="modal-body-section">
           {accordionItems.map((item, index) => (

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import ApexCharts from "apexcharts";
 
 const ChartBuilder = ({ id, advance }) => {
-  console.log(id);
+  // console.log(id);
   useEffect(() => {
     const options = {
       chart: {

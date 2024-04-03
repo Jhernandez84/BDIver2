@@ -7,7 +7,7 @@ const redesPage = () => {
   return (
     <div>
       <h1 className="text-white">Redes</h1>
-      <Attendance />
+      {/* <Attendance /> */}
     </div>
   );
 };
