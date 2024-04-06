@@ -1,0 +1,100 @@
+.calendar-container {
+  /* font-family: Arial, sans-serif; */
+  border-radius: 16px;
+  border: solid 1px;
+  padding: 0 5px 0 5px;
+  width: 250px;
+  min-height: 280px;
+  /* width: calc(100vw - 15px); */
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.calendar-render {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.calendar-render-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px 0 25px;
+}
+
+.calendar-render-header p {
+  font-weight: bolder;
+}
+
+.calendar-render-header .arrow {
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.calendar-render-header .arrow:hover {
+  color: aquamarine;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.calendar-render-body-headers {
+  background-color: black;
+  display: grid;
+  grid-template-columns: repeat(7, 31px);
+  justify-content: center;
+  text-align: center;
+  font-size: small;
+  padding: 5px;
+  margin: 5px;
+}
+
+.calendar-render-body-days {
+  display: grid;
+  grid-template-columns: repeat(7, 30px);
+  justify-content: center;
+  text-align: center;
+  font-size: smaller;
+}
+
+.calendar-render-body-days:hover {
+  cursor: pointer;
+}
+
+.calendar-render-body-days .non-current {
+  color: gray;
+  cursor: not-allowed;
+}
+
+.calendar-render-body-days td.active {
+  background-color: aquamarine;
+  border-radius: 50px;
+}
+
+.calendar-render-body-days td {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 25px;
+}
+
+.calendar-container .calendar-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.calendar-container .calendar-footer p {
+  font-size: smaller;
+  cursor: pointer;
+}

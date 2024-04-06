@@ -2,8 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import { db } from "@/Components/Firebase/firebase";
-import "./lgTableStyles.css";
+import { GetFireBaseData, GetFireBaseDataCount } from "@/Components/Firebase/DataManager/DataOperations";
+
 import { HiSearch, HiArrowUp, HiArrowDown } from "react-icons/hi";
+import "./lgTableStyles.css";
 
 import LGTableModal from "./lgTableModal";
 import CardChartComponent from "@/Components/CardsCharts/CardChartComponent";
@@ -14,41 +16,28 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
   const [DBEvento, setDBEvento] = useState("BDGeneralIglesia");
 
   const [DBdata, setDBdata] = useState([]); // Variable utilizada para tener todos los registros como base y no consultar constantemente la BD
+  const [DBdataCounter, setDBdataCounter] = useState([]); // Variable utilizada para tener todos los registros como base y no consultar constantemente la BD
+
+  console.log(DBEvento);
 
   useEffect(() => {
-    if (DBEvento) {
-      fetchData(); // Call the async function to fetch and update data when DBEvento is not null
-      console.log("FetchData triggered");
-    }
-  }, [DBEvento]);
-
-  const fetchData = async () => {
-    try {
-      if (DBEvento !== null && DBEvento !== "") {
-        const collectionRef = db.collection(`${DBEvento}`);
-        const querySnapshot = await collectionRef.get();
-
-        if (!querySnapshot.empty) {
-          const records = querySnapshot.docs
-            .map((doc) => ({
-              id: doc.id,
-              ...doc.data(),
-            }))
-            .filter((record) => record.EventoEstado !== "eliminado");
-
-          records.sort((a, b) => {
-            return a.Rut.localeCompare(b.Rut);
-          });
-
-          setDBdata(records); // Los datos en variable local
-        } else {
-          swal(`Sin registros para el evento: ${DBEvento}`);
+    const fetchData = async () => {
+      if (DBEvento) {
+        try {
+          const data = await GetFireBaseData(DBEvento);
+          const countData = await GetFireBaseDataCount(DBEvento)
+          setDBdata(data);
+          setDBdataCounter(countData);
+          console.log("FetchData triggered");
+        } catch (error) {
+          // Handle error if fetching data fails
+          console.error("Error fetching data:", error);
         }
       }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+    };
+
+    fetchData(); // Call the async function to fetch and update data when DBEvento is not null
+  }, [DBEvento]);
 
   const headers = [
     "Foto",
@@ -82,6 +71,12 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
 
   // Filter the data when valueToFind or DBdata changes
   useEffect(() => {
+    // If DBdata is empty, there's nothing to filter
+    if (!DBdata || DBdata.length === 0) {
+      setFilteredArray([]); // Set filteredArray to an empty array
+      return;
+    }
+
     // If valueToFind is empty, set filteredArray to DBdata directly
     if (!valueToFind) {
       setFilteredArray(DBdata);
@@ -92,16 +87,19 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
 
     // Filter DBdata based on the search string
     const filteredData = DBdata.filter((item) =>
-      Object.values(item).some((value) =>
-        value.toLowerCase().includes(searchString)
+      Object.values(item).some(
+        (value) =>
+          typeof value === "string" &&
+          value.toLowerCase().includes(searchString)
       )
     );
 
     setFilteredArray(filteredData); // Update state with filtered array
-  }, [valueToFind, DBdata]); // Run this
+  }, [valueToFind, DBdata]); // Run this effect whenever valueToFind or DBdata changes
 
   const handleSearchInput = (e) => {
     setvalueToFind(e.target.value);
+    console.log(valueToFind);
   };
 
   useEffect(() => {
@@ -120,9 +118,9 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
           <div>
             <CardChartComponent
               id={"lideres"}
-              CardChartData={"25"}
+              CardChartData={""}
               header={"lideres"}
-              text={"50"}
+              text={DBdataCounter}
               text2={"Var % en últimos 3 días"}
             />
           </div>
@@ -194,8 +192,10 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
                       />
                     </td>
                     <td>{item.Rut}</td>
-                    <td>{item.Nombres}</td>
+                    {/* <td>{item.Nombres}</td> */}
+                    <td>{item.Nombres.charAt(0).toUpperCase() +item.Nombres.slice(1).toLowerCase() }</td>
                     <td>
+                      {/* {item.ApellidoPaterno.charAt(0).toUpperCase() + item.ApellidoPaterno.slice(1).toLowerCase() } {item.ApellidoMaterno} */}
                       {item.ApellidoPaterno} {item.ApellidoMaterno}
                     </td>
                     <td>{item.FechaNacimiento}</td>
