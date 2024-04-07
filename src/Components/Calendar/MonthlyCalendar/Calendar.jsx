@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import CalendarModal from "./CalendarModal";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 
 import "./styles.css";
@@ -7,10 +8,15 @@ import "./styles.css";
 export const MonthlyCalendar = () => {
   // getting new date, current year and month
   const [currDate, setCurrDate] = useState(new Date());
-  const [currFormattedDate, setCurrFormattedDate] = useState(currDate.toISOString().split("T")[0])
+  const [currFormattedDate, setCurrFormattedDate] = useState(currDate.toISOString().split("T")[0]);
   const [currYear, setCurrYear] = useState(currDate.getFullYear());
   const [currMonth, setCurrMonth] = useState(currDate.getMonth());
   const [DaysArray, setDaysArray] = useState([]);
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const CalendarType = "larger"; //'fullScreen'
 
   // storing full name of all months in array
   const months = [
@@ -28,10 +34,10 @@ export const MonthlyCalendar = () => {
     "Diciembre",
   ];
 
- const handleGoCurrentDate = ()=>{
-    setCurrMonth(currDate.getMonth())
-    setCurrYear(currDate.getFullYear())
- }
+  const handleGoCurrentDate = () => {
+    setCurrMonth(currDate.getMonth());
+    setCurrYear(currDate.getFullYear());
+  };
 
   const handleMonthChangePrev = () => {
     if (currMonth - 1 < 0) {
@@ -54,6 +60,15 @@ export const MonthlyCalendar = () => {
   useEffect(() => {
     renderCalendar();
   }, [currMonth]);
+
+  const handleCreateEvent = (date) =>{
+    setSelectedDate(date);
+    setModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   const renderCalendar = () => {
     const firstDayOfMonth = new Date(currYear, currMonth, 1).getDay(); // getting first day of month
@@ -115,8 +130,18 @@ export const MonthlyCalendar = () => {
   };
 
   return (
-    <section className="calendar-container">
+    // <section className="calendar-container">
+    <section
+      className={`${
+        CalendarType === "small"
+          ? "calendar-container-small"
+          : "calendar-container-fullScreen"
+      }`}
+    >
       {/* <section className="calendar-header">Header</section> */}
+      {isModalOpen && (
+        <CalendarModal closeModal={closeModal} item={selectedDate}/>
+      )}
       <section className="calendar-render">
         <section className="calendar-render-header">
           <HiArrowLeft
@@ -156,9 +181,7 @@ export const MonthlyCalendar = () => {
                       ? "active"
                       : ""
                   }`}
-                  onClick={() => {
-                    alert(day.fullDate);
-                  }}
+                  onClick={() => {handleCreateEvent(day.formattedDate)}}
                 >
                   {day.day}
                 </td>
@@ -169,7 +192,13 @@ export const MonthlyCalendar = () => {
         </section>
       </section>
       <section className="calendar-footer">
-        <p onClick={()=>{handleGoCurrentDate()}}>Hoy: {`${currFormattedDate}`}</p>
+        <p
+          onClick={() => {
+            handleGoCurrentDate();
+          }}
+        >
+          Hoy: {`${currFormattedDate}`}
+        </p>
       </section>
     </section>
   );
