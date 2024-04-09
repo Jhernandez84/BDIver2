@@ -5,7 +5,7 @@ import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 
 import "./styles.css";
 
-export const CalendarMonthlyView = () => {
+export const CalendarMonthlyView = ({DaysArray, calendarType}) => {
   // getting new date, current year and month
   const [currDate, setCurrDate] = useState(new Date());
   const [currFormattedDate, setCurrFormattedDate] = useState(
@@ -13,14 +13,11 @@ export const CalendarMonthlyView = () => {
   );
   const [currYear, setCurrYear] = useState(currDate.getFullYear());
   const [currMonth, setCurrMonth] = useState(currDate.getMonth());
-  const [DaysArray, setDaysArray] = useState([]);
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
 
-  const [calendarType, setCalendarType] = useState("larger");
-
-  // storing full name of all months in array
+ // storing full name of all months in array
   const months = [
     "Enero",
     "Febrero",
@@ -59,9 +56,9 @@ export const CalendarMonthlyView = () => {
     }
   };
 
-  useEffect(() => {
-    renderCalendar();
-  }, [currMonth]);
+  // useEffect(() => {
+  //   renderCalendar();
+  // }, [currMonth]);
 
   const handleCreateEvent = (date) => {
     setSelectedDate(date);
@@ -72,64 +69,64 @@ export const CalendarMonthlyView = () => {
     setModalOpen(false);
   };
 
-  const renderCalendar = () => {
-    const firstDayOfMonth = new Date(currYear, currMonth, 1).getDay(); // getting first day of month
-    const lastDateOfMonth = new Date(currYear, currMonth + 1, 0).getDate(); // getting last date of month
-    const lastDayOfMonth = new Date(
-      currYear,
-      currMonth,
-      lastDateOfMonth
-    ).getDay(); // getting last day of month
-    const lastDateOfLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
-    const days = [];
+  // const renderCalendar = () => {
+  //   const firstDayOfMonth = new Date(currYear, currMonth, 1).getDay(); // getting first day of month
+  //   const lastDateOfMonth = new Date(currYear, currMonth + 1, 0).getDate(); // getting last date of month
+  //   const lastDayOfMonth = new Date(
+  //     currYear,
+  //     currMonth,
+  //     lastDateOfMonth
+  //   ).getDay(); // getting last day of month
+  //   const lastDateOfLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
+  //   const days = [];
 
-    for (let i = firstDayOfMonth; i > 0; i--) {
-      // creating array of previous month last days
-      const date = new Date(
-        currYear,
-        currMonth - 1,
-        lastDateOfLastMonth - i + 1
-      );
-      const formattedDate = date.toISOString().split("T")[0]; // Format date as yyyy-mm-dd
-      days.push({
-        day: lastDateOfLastMonth - i + 1,
-        thisMonth: "no",
-        currentDate: "no",
-        fullDate: formattedDate,
-      });
-    }
+  //   for (let i = firstDayOfMonth; i > 0; i--) {
+  //     // creating array of previous month last days
+  //     const date = new Date(
+  //       currYear,
+  //       currMonth - 1,
+  //       lastDateOfLastMonth - i + 1
+  //     );
+  //     const formattedDate = date.toISOString().split("T")[0]; // Format date as yyyy-mm-dd
+  //     days.push({
+  //       day: lastDateOfLastMonth - i + 1,
+  //       thisMonth: "no",
+  //       currentDate: "no",
+  //       fullDate: formattedDate,
+  //     });
+  //   }
 
-    for (let i = 1; i <= lastDateOfMonth; i++) {
-      // creating array of all days of current month
-      const date = new Date(currYear, currMonth, i);
-      const formattedDate = date.toISOString().split("T")[0]; // Format date as yyyy-mm-dd
-      const isActive =
-        i === currDate.getDate() &&
-        currMonth === new Date().getMonth() &&
-        currYear === new Date().getFullYear();
+  //   for (let i = 1; i <= lastDateOfMonth; i++) {
+  //     // creating array of all days of current month
+  //     const date = new Date(currYear, currMonth, i);
+  //     const formattedDate = date.toISOString().split("T")[0]; // Format date as yyyy-mm-dd
+  //     const isActive =
+  //       i === currDate.getDate() &&
+  //       currMonth === new Date().getMonth() &&
+  //       currYear === new Date().getFullYear();
 
-      days.push({
-        day: i,
-        thisMonth: "yes",
-        currentDate: isActive ? "yes" : "no",
-        fullDate: formattedDate,
-      });
-    }
+  //     days.push({
+  //       day: i,
+  //       thisMonth: "yes",
+  //       currentDate: isActive ? "yes" : "no",
+  //       fullDate: formattedDate,
+  //     });
+  //   }
 
-    for (let i = lastDayOfMonth; i < 6; i++) {
-      // creating array of next month first days
-      const date = new Date(currYear, currMonth + 1, i - lastDayOfMonth + 1);
-      const formattedDate = date.toISOString().split("T")[0]; // Format date as yyyy-mm-dd
-      days.push({
-        day: i - lastDayOfMonth + 1,
-        thisMonth: "no",
-        currentDate: "no",
-        fullDate: formattedDate,
-      });
-    }
-    setDaysArray(days);
-    console.log(DaysArray);
-  };
+  //   for (let i = lastDayOfMonth; i < 6; i++) {
+  //     // creating array of next month first days
+  //     const date = new Date(currYear, currMonth + 1, i - lastDayOfMonth + 1);
+  //     const formattedDate = date.toISOString().split("T")[0]; // Format date as yyyy-mm-dd
+  //     days.push({
+  //       day: i - lastDayOfMonth + 1,
+  //       thisMonth: "no",
+  //       currentDate: "no",
+  //       fullDate: formattedDate,
+  //     });
+  //   }
+  //   setDaysArray(days);
+  //   console.log(DaysArray);
+  // };
 
   return (
     // <section className="calendar-container">
@@ -145,49 +142,6 @@ export const CalendarMonthlyView = () => {
         <CalendarModal closeModal={closeModal} item={selectedDate} />
       )}
       <section className="calendar-render">
-        <section className="calendar-render-header">
-          <section className="calendar-render-header-selector">
-            <div
-              className="selector WeekView"
-              onClick={() => {
-                setCalendarType("small");
-              }}
-            >
-              Semana
-            </div>
-            <div
-              className="selector MonthView"
-              onClick={() => {
-                setCalendarType("larger");
-              }}
-            >
-              Mes
-            </div>
-            <div
-              className="selector YearView"
-              onClick={() => {
-                setCalendarType("year");
-              }}
-            >
-              Año
-            </div>
-          </section>
-          <section className="calendar-render-header-navigator">
-            <HiArrowLeft
-              className="arrow"
-              onClick={() => {
-                handleMonthChangePrev();
-              }}
-            />
-            <p>{`${months[currMonth]} ${currYear}`}</p>
-            <HiArrowRight
-              className="arrow"
-              onClick={() => {
-                handleMonthChangeNext();
-              }}
-            />
-          </section>
-        </section>
         <section className="calendar-render-body">
           {/* <div className="calendar-render-body-daysHeaders"> */}
           <table>

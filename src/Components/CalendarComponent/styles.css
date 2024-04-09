@@ -63,7 +63,7 @@
   padding: 0 25px 0 25px;
 }
 
-.calendar-container-fullScreen .calendar-render-header-selector {
+.calendar-render-header-selector {
   display: grid;
   grid-template-columns: auto auto auto;
   gap: 10px;
@@ -74,7 +74,7 @@
   border-radius: 20px;
 }
 
-.calendar-container-fullScreen .calendar-render-header-navigator {
+.calendar-render-header-navigator {
   display: grid;
   grid-template-columns: auto auto auto;
   justify-content: center;
@@ -82,13 +82,9 @@
   align-items: center;
   padding: 0 15px 0 15px;
   margin: 5px 15px 5px 15px;
-  border-radius: 25px;
-  width: 250px;
 }
 
-.calendar-container-fullScreen
-  .calendar-render-header-selector
-  .selector:hover {
+.calendar-render-header-selector .selector:hover {
   cursor: pointer;
   color: #0f766e;
 }
