@@ -1,17 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import UserTable from "@/Components/UserTable/UserTable";
-import CalendarWeekView from "@/Components/Calendar/CalendarWeekView";
-import CalendarMonthView from "@/Components/Calendar/CalendarMonthView";
-import CalendarYearView from "@/Components/Calendar/CalendarYearView";
-import CalendarHeaders from "@/Components/Calendar/CalendarHeaders";
-import CalendarAndSummary from "@/Components/CdrAndSummary/CalendarAndSummary";
-import { MonthlyCalendar } from "@/Components/Calendar/MonthlyCalendar/Calendar";
+import CalendarComponent from "@/Components/CalendarComponent/CalendarComponent";
+
 
 const Calendar = () => {
   const [calendarView, setCalendarView] = useState("MonthView");
   // return <CalendarMonthView />;
-  return <MonthlyCalendar />;
+  return <CalendarComponent />;
+  // return <MonthlyCalendar />;
+
   // switch (calendarView) {
   //   case "WeekView":
   //     return (

@@ -5,7 +5,7 @@ import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 
 import "./styles.css";
 
-export const MonthlyCalendar = () => {
+export const CalendarWeeklyView = () => {
   // getting new date, current year and month
   const [currDate, setCurrDate] = useState(new Date());
   const [currFormattedDate, setCurrFormattedDate] = useState(currDate.toISOString().split("T")[0]);
@@ -16,7 +16,7 @@ export const MonthlyCalendar = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
 
-  const CalendarType = "larger"; //'fullScreen'
+  const CalendarType = "week"; //'fullScreen'
 
   // storing full name of all months in array
   const months = [
