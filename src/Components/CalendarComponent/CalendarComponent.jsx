@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { CalendarMonthlyView } from "./CalendarMonthlyView";
@@ -8,7 +10,7 @@ import "./styles.css";
 // Este componente va a renderizar todo el calendario
 
 const CalendarComponent = () => {
-  const [calendarView, setCalendarView] = useState("month");
+  // const [calendarView, setCalendarView] = useState("month");
 
   const [currDate, setCurrDate] = useState(new Date());
   const [currFormattedDate, setCurrFormattedDate] = useState(
@@ -21,11 +23,15 @@ const CalendarComponent = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
 
-  const [calendarType, setCalendarType] = useState("larger");
+  const [calendarType, setCalendarType] = useState("month");
 
   useEffect(() => {
     renderCalendar();
   }, [currMonth]);
+
+  useEffect(() => {
+    console.log(calendarType);
+  }, [calendarType]);
 
   const months = [
     "Enero",
@@ -65,22 +71,22 @@ const CalendarComponent = () => {
     }
   };
 
-  const renderCalendar = () => {
-    const firstDayOfMonth = new Date(currYear, currMonth, 1).getDay(); // getting first day of month
-    const lastDateOfMonth = new Date(currYear, currMonth + 1, 0).getDate(); // getting last date of month
+  const renderCalendar = (targetYear, targetMonth) => {
+    const firstDayOfMonth = new Date(targetYear, targetMonth, 1).getDay(); // getting first day of month
+    const lastDateOfMonth = new Date(targetYear, targetMonth + 1, 0).getDate(); // getting last date of month
     const lastDayOfMonth = new Date(
-      currYear,
-      currMonth,
+      targetYear,
+      targetMonth,
       lastDateOfMonth
     ).getDay(); // getting last day of month
-    const lastDateOfLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
+    const lastDateOfLastMonth = new Date(targetYear, targetMonth, 0).getDate(); // getting last date of previous month
     const days = [];
 
     for (let i = firstDayOfMonth; i > 0; i--) {
       // creating array of previous month last days
       const date = new Date(
-        currYear,
-        currMonth - 1,
+        targetYear,
+        targetMonth - 1,
         lastDateOfLastMonth - i + 1
       );
       const formattedDate = date.toISOString().split("T")[0]; // Format date as yyyy-mm-dd
@@ -94,12 +100,12 @@ const CalendarComponent = () => {
 
     for (let i = 1; i <= lastDateOfMonth; i++) {
       // creating array of all days of current month
-      const date = new Date(currYear, currMonth, i);
+      const date = new Date(targetYear, targetMonth, i);
       const formattedDate = date.toISOString().split("T")[0]; // Format date as yyyy-mm-dd
       const isActive =
         i === currDate.getDate() &&
-        currMonth === new Date().getMonth() &&
-        currYear === new Date().getFullYear();
+        targetMonth === new Date().getMonth() &&
+        targetYear === new Date().getFullYear();
 
       days.push({
         day: i,
@@ -111,7 +117,11 @@ const CalendarComponent = () => {
 
     for (let i = lastDayOfMonth; i < 6; i++) {
       // creating array of next month first days
-      const date = new Date(currYear, currMonth + 1, i - lastDayOfMonth + 1);
+      const date = new Date(
+        targetYear,
+        targetMonth + 1,
+        i - lastDayOfMonth + 1
+      );
       const formattedDate = date.toISOString().split("T")[0]; // Format date as yyyy-mm-dd
       days.push({
         day: i - lastDayOfMonth + 1,
@@ -120,8 +130,7 @@ const CalendarComponent = () => {
         fullDate: formattedDate,
       });
     }
-    setDaysArray(days);
-    console.log(DaysArray);
+    return days;
   };
 
   return (
@@ -130,23 +139,29 @@ const CalendarComponent = () => {
         <section className="calendar-render-header">
           <section className="calendar-render-header-selector">
             <div
-              className="selector WeekView"
+              className={`selector WeekView ${
+                calendarType === "week" ? "active" : ""
+              }`}
               onClick={() => {
-                setCalendarType("small");
+                setCalendarType("week");
               }}
             >
               Semana
             </div>
             <div
-              className="selector MonthView"
+              className={`selector MonthView ${
+                calendarType === "month" ? "active" : ""
+              }`}
               onClick={() => {
-                setCalendarType("larger");
+                setCalendarType("month");
               }}
             >
               Mes
             </div>
             <div
-              className="selector YearView"
+              className={`selector YearView ${
+                calendarType === "year" ? "active" : ""
+              }`}
               onClick={() => {
                 setCalendarType("year");
               }}
@@ -171,26 +186,82 @@ const CalendarComponent = () => {
           </section>
         </section>
       </section>
-      <section className="Calendar-body-container">
-        <section className="left-side-panel">
+      {calendarType === "month" && (
+        <section className="Calendar-body-container-monthview">
           <CalendarMonthlyView
-            DaysArray={DaysArray}
+            DaysArray={renderCalendar(currYear, currMonth)}
             calendarType={calendarType}
           />
         </section>
-        {/* Acá muestra los meses del año */}
-        {/* Acá muestra los meses del año */}
-        {/* Acá muestra los meses del año */}
-        {/* <section className="right-side-panel"> 
-          <CalendarMonthlyView DaysArray={DaysArray} calendarType="small" />
-          <CalendarMonthlyView DaysArray={DaysArray} calendarType="small" />
-          <CalendarMonthlyView DaysArray={DaysArray} calendarType="small" />
-          <CalendarMonthlyView DaysArray={DaysArray} calendarType="small" />
-          <CalendarMonthlyView DaysArray={DaysArray} calendarType="small" />
-          <CalendarMonthlyView DaysArray={DaysArray} calendarType="small" />
-          <CalendarMonthlyView DaysArray={DaysArray} calendarType="small" />
-        </section> */}
-      </section>
+      )}
+      {calendarType === "week" && (
+        <section className="Calendar-body-container-weekview">
+          <div className="week-calendar-selector">
+            <CalendarMonthlyView
+              DaysArray={renderCalendar(currYear, currMonth)}
+              calendarType="small"
+            />
+          </div>
+          <CalendarMonthlyView
+            DaysArray={[1, 2, 3, 4, 5, 6, 7]}
+            // DaysArray={renderCalendar(currYear, currMonth)}
+          />
+        </section>
+      )}
+      {calendarType === "year" && (
+        <section className="Calendar-body-container-yearview">
+          <div className="year-calendar-selector">
+            <CalendarMonthlyView
+              DaysArray={renderCalendar(0, currMonth)}
+              calendarType="small"
+            />
+            <CalendarMonthlyView
+              DaysArray={renderCalendar(1, currMonth)}
+              calendarType="small"
+            />
+            <CalendarMonthlyView
+              DaysArray={renderCalendar(2, currMonth)}
+              calendarType="small"
+            />
+            <CalendarMonthlyView
+              DaysArray={renderCalendar(3, currMonth)}
+              calendarType="small"
+            />
+            <CalendarMonthlyView
+              DaysArray={renderCalendar(4, currMonth)}
+              calendarType="small"
+            />
+            <CalendarMonthlyView
+              DaysArray={renderCalendar(5, currMonth)}
+              calendarType="small"
+            />
+            <CalendarMonthlyView
+              DaysArray={renderCalendar(6, currMonth)}
+              calendarType="small"
+            />
+            <CalendarMonthlyView
+              DaysArray={renderCalendar(7, currMonth)}
+              calendarType="small"
+            />
+            <CalendarMonthlyView
+              DaysArray={renderCalendar(8, currMonth)}
+              calendarType="small"
+            />
+            <CalendarMonthlyView
+              DaysArray={renderCalendar(9, currMonth)}
+              calendarType="small"
+            />
+            <CalendarMonthlyView
+              DaysArray={renderCalendar(10, currMonth)}
+              calendarType="small"
+            />
+            <CalendarMonthlyView
+              DaysArray={renderCalendar(11, currMonth)}
+              calendarType="small"
+            />
+          </div>
+        </section>
+      )}
     </section>
   );
 };

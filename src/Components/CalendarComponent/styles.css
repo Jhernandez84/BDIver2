@@ -3,24 +3,63 @@
   flex-direction: column;
   gap: 10px;
   width: calc(100vw - 150px);
-  height: calc(100vh - 150px);
+  height: calc(100vh - 50px);
+}
+
+.Calendar-container-component .Calendar-body-container-weekview {
+  display: grid;
+  grid-template-columns: 250px auto;
+  border-radius: solid 1px;
+  width: calc(100vw - 100px);
+  height: calc(100vh - 50px);
+  transition: ease-in 0.3s;
+}
+
+.week-calendar-selector {
+  transition: ease-in 0.3s;
+}
+
+.year-calendar-selector {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: space-around;
+  place-items: center; /* This centers both horizontally and vertically */
+  width: 100%;
+}
+
+.active {
+  color: #0f766e;
+}
+
+.Calendar-container-component .Calendar-body-container-monthview {
+  width: calc(100vw - 100px);
+  height: calc(100vh - 50px);
+}
+
+.Calendar-container-component .Calendar-body-container-yearview {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .calendar-container-small {
-  /* font-family: Arial, sans-serif; */
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
   border-radius: 16px;
-  border: solid 1px;
-  padding: 0 5px 0 5px;
   width: 250px;
   min-height: 280px;
 }
 
+.calendar-container-small .calendar-footer {
+  display: none;
+}
+
 .calendar-container-fullScreen {
+  box-sizing: content-box;
   border-radius: 16px;
-  border: solid 1px;
   padding: 0 5px 0 5px;
-  width: calc(100vw - 150px);
-  height: calc(100vh - 50px);
+  height: 100%;
 }
 
 .calendar-render-body {
