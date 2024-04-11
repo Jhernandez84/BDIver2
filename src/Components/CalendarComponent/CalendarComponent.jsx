@@ -133,6 +133,77 @@ const CalendarComponent = () => {
     return days;
   };
 
+  // crear una funcion que busque los horarios seleccionados para la fecha dada y retorne si está tomada o libre
+  // crear una funcion que busque los horarios seleccionados para la fecha dada y retorne si está tomada o libre
+
+  const TimeFrame = [
+    { Time: "10:00", Status: "Available" },
+    { Time: "11:00", Status: "Busy", User: "Jonathan Hernandez" },
+    { Time: "12:00", Status: "Busy", User: "Daniela Navarro" },
+    { Time: "13:00", Status: "Busy", User: "Matias Hernandez" },
+    { Time: "14:00", Status: "Available" },
+    { Time: "15:00", Status: "Available" },
+    { Time: "16:00", Status: "Available" },
+    { Time: "17:00", Status: "Busy", User: "Jonathan" },
+    { Time: "18:00", Status: "Busy", user: "Jonathan" },
+  ];
+
+  const viewOptions = ["Week View", "Day View"];
+
+  // tengo que considerar el usuario y la empresa para ver su calendario
+  // tengo que considerar el usuario y la empresa para ver su calendario
+  const WeekDays = [
+    {
+      weekNumber: 1,
+      day: 1,
+      name: "Monday",
+      thisMonth: "yes",
+      timeSlot: TimeFrame,
+    },
+    {
+      weekNumber: 1,
+      day: 2,
+      name: "Tuesday",
+      thisMonth: "yes",
+      timeSlot: TimeFrame,
+    },
+    {
+      weekNumber: 1,
+      day: 3,
+      name: "Wednesday",
+      thisMonth: "yes",
+      timeSlot: TimeFrame,
+    },
+    {
+      weekNumber: 1,
+      day: 4,
+      name: "Thursday",
+      thisMonth: "yes",
+      timeSlot: TimeFrame,
+    },
+    {
+      weekNumber: 1,
+      day: 5,
+      name: "Friday",
+      thisMonth: "yes",
+      timeSlot: TimeFrame,
+    },
+    {
+      weekNumber: 1,
+      day: 6,
+      name: "Saturday",
+      thisMonth: "yes",
+      timeSlot: TimeFrame,
+    },
+    {
+      weekNumber: 1,
+      day: 7,
+      name: "Sunday",
+      thisMonth: "yes",
+      timeSlot: TimeFrame,
+    },
+  ];
+
   return (
     <section className="Calendar-container-component">
       <section className="Calendar-header-and-selectors">
@@ -191,6 +262,7 @@ const CalendarComponent = () => {
           <CalendarMonthlyView
             DaysArray={renderCalendar(currYear, currMonth)}
             calendarType={calendarType}
+            calendarView=""
           />
         </section>
       )}
@@ -200,10 +272,20 @@ const CalendarComponent = () => {
             <CalendarMonthlyView
               DaysArray={renderCalendar(currYear, currMonth)}
               calendarType="small"
+              calendarView=""
             />
+            {/* <select value={selectedView} onChange={handleViewChange}> */}
+            <select>
+              {viewOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
           </div>
           <CalendarMonthlyView
-            DaysArray={[1, 2, 3, 4, 5, 6, 7]}
+            DaysArray={WeekDays}
+            calendarView="WeekView"
             // DaysArray={renderCalendar(currYear, currMonth)}
           />
         </section>

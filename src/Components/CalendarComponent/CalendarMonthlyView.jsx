@@ -5,7 +5,12 @@ import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 
 import "./styles.css";
 
-export const CalendarMonthlyView = ({ DaysArray, calendarType }) => {
+export const CalendarMonthlyView = ({
+  DaysArray,
+  calendarType,
+  calendarView,
+}) => {
+  console.log(DaysArray);
   // getting new date, current year and month
   const [currDate, setCurrDate] = useState(new Date());
   const [currFormattedDate, setCurrFormattedDate] = useState(
@@ -53,23 +58,53 @@ export const CalendarMonthlyView = ({ DaysArray, calendarType }) => {
               <tr>Dom</tr>
             </thead>
             <tbody className="calendar-render-body-days">
-              {DaysArray.map((day, index) => (
-                <td
-                  key={day.fullDate}
-                  className={`${
-                    day.thisMonth === "yes" ? "current" : "non-current"
-                  } ${
-                    day.thisMonth === "yes" && day.currentDate === "yes"
-                      ? "active"
-                      : ""
-                  }`}
-                  onClick={() => {
-                    handleCreateEvent(day.formattedDate);
-                  }}
-                >
-                  {day.day}
-                </td>
-              ))}
+              {calendarView === "WeekView"
+                ? DaysArray.map((day, index) => (
+                    <td
+                      key={day.fullDate}
+                      // className={`${
+                      //   day.thisMonth === "yes" ? "current" : "non-current"
+                      // } ${
+                      //   day.thisMonth === "yes" && day.currentDate === "yes"
+                      //     ? "active"
+                      //     : ""
+                      // }`}
+                    >
+                      {day.day}
+                      {day.timeSlot.map((time, index) => (
+                        <>
+                          <div
+                            key={index}
+                            className={`${
+                              time.Status === "Available"
+                                ? "timeSelector Available"
+                                : "timeSelector Busy"
+                            }`}
+                          >
+                            <p>{time.Time}</p>
+                            <p>{time.User}</p>
+                          </div>
+                        </>
+                      ))}
+                    </td>
+                  ))
+                : DaysArray.map((day, index) => (
+                    <td
+                      key={day.fullDate}
+                      className={`${
+                        day.thisMonth === "yes" ? "current" : "non-current"
+                      } ${
+                        day.thisMonth === "yes" && day.currentDate === "yes"
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() => {
+                        handleCreateEvent(day.formattedDate);
+                      }}
+                    >
+                      {day.day}
+                    </td>
+                  ))}
             </tbody>
           </table>
           {/* </div> */}

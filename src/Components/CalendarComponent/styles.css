@@ -27,7 +27,7 @@
   width: 100%;
 }
 
-.active {
+.selector.active {
   color: #0f766e;
 }
 
@@ -207,8 +207,24 @@
 
 } */
 
-.calendar-render-body-days:hover {
+.calendar-render-body-days .timeSelector {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  border: solid 1px;
+  border-radius: 25px;
+  margin: 5px;
+}
+
+.calendar-render-body-days .timeSelector.Available {
   cursor: pointer;
+  /* color: #0f766e; */
+}
+
+.calendar-render-body-days .timeSelector.Busy {
+  cursor: not-allowed;
+  color: #0f172a;
 }
 
 .calendar-render-body-days .non-current {
