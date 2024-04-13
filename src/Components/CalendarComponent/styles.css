@@ -3,15 +3,15 @@
   flex-direction: column;
   gap: 10px;
   width: calc(100vw - 150px);
-  height: calc(100vh - 50px);
+  height: 100%;
 }
 
 .Calendar-container-component .Calendar-body-container-weekview {
   display: grid;
   grid-template-columns: 250px auto;
   border-radius: solid 1px;
-  width: calc(100vw - 100px);
-  height: calc(100vh - 50px);
+  height: 100%;
+  /* height: calc(100vh - 50px); */
   transition: ease-in 0.3s;
 }
 
@@ -69,7 +69,7 @@
 
 .calendar-container-fullScreen .calendar-render-body table {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 
 .calendar-header {
@@ -86,12 +86,19 @@
   font-weight: bold;
 }
 
-.calendar-render {
+.calendar-container-fullScreen .calendar-render {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   /* width: calc(100% - 50px); */
   height: calc(100% - 50px);
+}
+
+.calendar-container-fullScreen .calendar-render table {
+  height: 100%;
 }
 
 .calendar-render-header {
@@ -187,6 +194,48 @@
   justify-content: flex-start;
 }
 
+.calendar-container-fullScreen
+  .calendar-render-body-days
+  .WeekViewAvailability {
+  max-height: 100%;
+  overflow: auto;
+}
+
+.calendar-container-fullScreen
+  .calendar-render-body-days
+  .WeekViewAvailability
+  .timeSelector {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  border: solid 1px;
+  border-radius: 25px;
+  margin: 2px;
+  height: 70px;
+}
+
+.calendar-container-fullScreen
+  .calendar-render-body-days
+  .WeekViewAvailability
+  .timeSelector {
+  display: grid;
+  grid-template-rows: 20% auto;
+  width: 100%;
+  justify-content: center;
+  gap: 5px;
+}
+
+.calendar-container-fullScreen
+  .calendar-render-body-days
+  .WeekViewAvailability
+  .timeSelector
+  .timeFrame {
+  width: 100%;
+  font-weight: bold;
+
+}
+
 .calendar-container-fullScreen .calendar-render-body-days td.active {
   font-weight: bolder;
   color: aquamarine;
@@ -201,29 +250,13 @@
   font-size: smaller;
 }
 
-/* .calendar-render-body-days-weekly {
-
-
-
-} */
-
-.calendar-render-body-days .timeSelector {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
-  border: solid 1px;
-  border-radius: 25px;
-  margin: 5px;
-}
-
 .calendar-render-body-days .timeSelector.Available {
   cursor: pointer;
   /* color: #0f766e; */
 }
 
 .calendar-render-body-days .timeSelector.Busy {
-  cursor: not-allowed;
+  cursor:pointer;
   color: #0f172a;
 }
 
@@ -247,6 +280,11 @@
   justify-content: center;
   text-align: center;
   height: 25px;
+}
+
+.calendar-render-body-days .WeekViewAvailability {
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .calendar-container .calendar-footer {

@@ -146,6 +146,7 @@ const CalendarComponent = () => {
     { Time: "16:00", Status: "Available" },
     { Time: "17:00", Status: "Busy", User: "Jonathan" },
     { Time: "18:00", Status: "Busy", user: "Jonathan" },
+    { Time: "18:30", Status: "Busy", user: "Jonathan" },
   ];
 
   const viewOptions = ["Week View", "Day View"];

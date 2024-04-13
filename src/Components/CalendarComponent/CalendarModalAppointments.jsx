@@ -3,8 +3,7 @@
 import React from "react";
 import { useState } from "react";
 
-const CalendarModal = ({closeModal, item}) => {
-  console.log(item)
+const CalendarModalAppointments = ({ closeModal, item, time }) => {
   // const {
   //   selectedDate,
   //   // Rut,
@@ -25,14 +24,10 @@ const CalendarModal = ({closeModal, item}) => {
     setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
-  const [selectedOption, setSelectedOption] = useState("");
-  const [selectedOptionEstadoCivil, setSelectedOptionEstadoCivil] = useState("");
-  const [selectedOptionDirectorio, setSelectedOptionDirectorio] = useState("");
-  const [selectedOptionLiderazgo, setSelectedOptionLiderazgo] = useState("");
-  const [selectedOptionGrupoQueLider, setSelectedOptionGrupoQueLidera] = useState("");
-  const [selectedOptionRedes, setSelectedOptionRedes] = useState("");
-  const [selectedOptionGrupoEtario, setSelectedOptionGrupoEtario] = useState("");
-  const [selectedOptionLugarOrigen, setSelectedOptionLugarOrigen] = useState("");
+  const [selectedOptionDirectorio, setSelectedOptionDirectorio] =
+    useState("SI");
+  const [selectedOptionLugarOrigen, setSelectedOptionLugarOrigen] =
+    useState("");
 
   const handleSelectChangeEstadoCivil = (event) => {
     setSelectedOptionEstadoCivil(event.target.value);
@@ -65,6 +60,7 @@ const CalendarModal = ({closeModal, item}) => {
     "Líder",
     "Otro",
   ];
+
   const options3 = ["Si", "No"];
   const options4 = [
     "No Aplica",
@@ -205,27 +201,68 @@ const CalendarModal = ({closeModal, item}) => {
 
   const AccordionComponent1 = () => (
     <section className="modal-personal-data-section">
-
+      <div>
+        <label htmlFor="options" className="input-label">
+          Tipo actividad:
+        </label>
+        <select
+          id="options"
+          value={selectedOptionDirectorio}
+          onChange={handleSelectChangeDirectorio}
+          className="input-name"
+        >
+          <option value="Seleccione" selected disabled>
+            Seleccione
+          </option>
+          {options5.map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label htmlFor="options" className="input-label">
+          Responsable:
+        </label>
+        <select
+          id="options"
+          value={selectedOptionDirectorio}
+          onChange={handleSelectChangeDirectorio}
+          className="input-name"
+        >
+          <option value="Seleccione" selected disabled>
+            Seleccione
+          </option>
+          {options5.map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
+      <button className="btn-modal" onClick={() => closeModal()}>
+        Guardar
+      </button>
     </section>
   );
 
   const AccordionComponent2 = () => (
     <section className="two-rows-data-section">
-      
-      
-    </section>
-  );
-
-  const AccordionComponent3 = () => (
-    <section className="two-cols-data-section">
-      
-
+      <button className="btn-modal" onClick={() => closeModal()}>
+        Guardar
+      </button>
     </section>
   );
 
   const accordionItems = [
-    { title: "Asignar actividad", content: <AccordionComponent0 /> },
-    { title: "Crear Evento", content: <AccordionComponent1 /> },
+    { title: "Información Personal", content: <AccordionComponent0 /> },
+    {
+      title: "Asignar tarea / responsabilidad",
+      content: <AccordionComponent1 />,
+    },
+    { title: "Agregar agenda", content: <AccordionComponent2 /> },
+    // { title: "Grupo familiar", content: <AccordionComponent2 /> },
   ];
 
   return (
@@ -236,7 +273,7 @@ const CalendarModal = ({closeModal, item}) => {
           &times;
         </span>
         <section className="modal-header-section">
-          Ingresar nuevo registro para el {item}
+          Reservando un cupo para el {item} a las {time} horas.
         </section>
         <section className="modal-body-section">
           {accordionItems.map((item, index) => (
@@ -260,13 +297,13 @@ const CalendarModal = ({closeModal, item}) => {
         </section>
 
         <section className="modal-footer-section">
-          <button className="btn-modal" onClick={() => closeModal()}>
+          {/* <button className="btn-modal" onClick={() => closeModal()}>
             Guardar
-          </button>
+          </button> */}
         </section>
       </div>
     </div>
   );
 };
 
-export default CalendarModal;
+export default CalendarModalAppointments;
