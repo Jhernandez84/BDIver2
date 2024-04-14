@@ -226,6 +226,7 @@ const CalendarModal = ({closeModal, item}) => {
   const accordionItems = [
     { title: "Asignar actividad", content: <AccordionComponent0 /> },
     { title: "Crear Evento", content: <AccordionComponent1 /> },
+    { title: "Vista Rápida Agenda", content: <AccordionComponent1 /> },
   ];
 
   return (
