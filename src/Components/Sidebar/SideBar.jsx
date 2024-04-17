@@ -61,16 +61,6 @@ const SideBarComponent = ({ children }) => {
       ],
     },
     {
-      SBIcon: <HiUserGroup style={{ fontSize: iconSize }} />,
-      SBMenu: "Redes",
-      SBRout: "/redes",
-    },
-    {
-      SBIcon: <HiUserGroup style={{ fontSize: iconSize }} />,
-      SBMenu: "Grupos",
-      SBRout: "/teamgroupsn",
-    },
-    {
       SBIcon: <HiTicket style={{ fontSize: iconSize }} />,
       SBMenu: "Eventos",
       SBRout: "/events",

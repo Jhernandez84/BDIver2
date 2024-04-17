@@ -9,7 +9,6 @@ td img {
   height: 36px;
   border-radius: 50%;
   margin-right: 0.15rem;
-
   vertical-align: middle;
 }
 
@@ -37,14 +36,29 @@ td {
 }
 
 .table_header {
-  width: 100%;
   height: min(10%, 30px);
   background-color: #1e293b;
   padding: 1rem 1rem;
-
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  transition: 0.4s;
+}
+
+.table .table_filter_section {
+  background-color: #1e293b;
+  padding: 1rem 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: first baseline;
+  gap: 5px;
+  transition: 0.4s;
+}
+
+.table_header .table_header_title {
+  font-size: x-large;
+  text-align: center;
 }
 
 .table_header .table-header-finder {
@@ -88,7 +102,7 @@ thead th {
   font-size: small;
 }
 
-.theader-header{
+.theader-header {
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -111,12 +125,11 @@ tbody tr:hover {
   cursor: pointer;
 }
 
-.charts-container{
+.charts-container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-
 
 /* Acá van las configuraciones del Modal */
 .modal-main-data-container {
@@ -142,7 +155,7 @@ tbody tr:hover {
   margin: 5px;
 }
 
-.three-cols-data-section{
+.three-cols-data-section {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -195,7 +208,7 @@ button {
   height: 30px;
   width: 200px;
   border-radius: 15px;
-  padding-left: 15px ;
+  padding-left: 15px;
   margin-top: 5px;
   /* gap: 25px; */
 }
@@ -269,7 +282,6 @@ label {
   width: 50%;
   min-height: 45%;
   z-index: 10000; /* Ensure the modal appears above all other elements */
-
 }
 
 .modal-header-section {
@@ -324,7 +336,7 @@ label {
   cursor: pointer;
   background: #111827;
   border-radius: 25px;
-  font-size: small ;
+  font-size: small;
 }
 
 .accordion-header.active {

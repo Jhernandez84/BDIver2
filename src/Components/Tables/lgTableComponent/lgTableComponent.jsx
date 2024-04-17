@@ -2,13 +2,17 @@
 
 import React, { useEffect, useState } from "react";
 import { db } from "@/Components/Firebase/firebase";
-import { GetFireBaseData, GetFireBaseDataCount } from "@/Components/Firebase/DataManager/DataOperations";
+import {
+  GetFireBaseData,
+  GetFireBaseDataCount,
+} from "@/Components/Firebase/DataManager/DataOperations";
 
 import { HiSearch, HiArrowUp, HiArrowDown } from "react-icons/hi";
 import "./lgTableStyles.css";
 
 import LGTableModal from "./lgTableModal";
 import CardChartComponent from "@/Components/CardsCharts/CardChartComponent";
+import sampledata from "@/Components/Firebase/sampledata";
 
 const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
   const { user } = "Jhernand";
@@ -20,24 +24,26 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
 
   console.log(DBEvento);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (DBEvento) {
-        try {
-          const data = await GetFireBaseData(DBEvento);
-          const countData = await GetFireBaseDataCount(DBEvento)
-          setDBdata(data);
-          setDBdataCounter(countData);
-          console.log("FetchData triggered");
-        } catch (error) {
-          // Handle error if fetching data fails
-          console.error("Error fetching data:", error);
-        }
-      }
-    };
+  useEffect(() => setDBdata(sampledata), []);
 
-    fetchData(); // Call the async function to fetch and update data when DBEvento is not null
-  }, [DBEvento]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     if (DBEvento) {
+  //       try {
+  //         const data = await GetFireBaseData(DBEvento);
+  //         const countData = await GetFireBaseDataCount(DBEvento);
+  //         setDBdata(data);
+  //         setDBdataCounter(countData);
+  //         console.log("FetchData triggered");
+  //       } catch (error) {
+  //         // Handle error if fetching data fails
+  //         console.error("Error fetching data:", error);
+  //       }
+  //     }
+  //   };
+
+  //   fetchData(); // Call the async function to fetch and update data when DBEvento is not null
+  // }, [DBEvento]);
 
   const headers = [
     "Foto",
@@ -46,9 +52,12 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
     "Apellidos",
     "Fech. Nac.",
     "Teléfono",
-    "Correo",
     "Estado Civil",
-    "Estado",
+    "Red Asignada",
+    "Grupo Iglesia",
+    "Equipo de Trabajo",
+    "Lugar Origen",
+    "Estado Iglesia",
     "Actualizado?",
   ];
 
@@ -68,6 +77,82 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
   const [valueToFind, setvalueToFind] = useState("");
   const [readyToFind, setReadytoFind] = useState(false);
   const [filteredArray, setFilteredArray] = useState([]);
+  const [selectedFirstFilter, setSelectedFirstFilter] = useState("");
+  const [selectedSecondFilter, setselectedSecondFilter] = useState("");
+  const [selectedThirdFilter, setselectedThirdFilter] = useState("");
+  const [selectedFourthFilter, setselectedFourthFilter] = useState("");
+  const [selectedFifthFilter, setselectedFifthFilter] = useState("");
+
+  const [isChecked, setIsChecked] = useState(false); // State to track checkbox state
+
+  const firstFilter = [
+    "Todos los equipos",
+    "Director",
+    "Presidente",
+    "Vice-Presidente",
+    "Tesorero",
+    "SubTesorero",
+    "Secretario",
+    "SubSecretario",
+  ];
+
+  const secondFilter = [
+    "Todas las redes",
+    "Director",
+    "Presidente",
+    "Vice-Presidente",
+    "Tesorero",
+    "SubTesorero",
+    "Secretario",
+    "SubSecretario",
+  ];
+  const thirdFilter = [
+    "Todos los niveles",
+    "Pastores Principales",
+    "Pastores",
+    "Ancianos",
+    "Diáconos",
+    "Líderes",
+    "Sub-líderes",
+    "Ayudantes",
+    "Sin liderazgo",
+  ];
+  const FourthFilter = [
+    "Todos los grupos",
+    "Iver Kids",
+    "Iver Jóvenes",
+    "Iver Mujeres",
+    "Iver Varones",
+ ];
+  const FifthFilter = [
+    "IverChile",
+    "IverChile Central",
+    "Iver Talcahuano",
+    "Iver La Calera",
+    "Iver San Clemente",
+    "Iver Nancahua",
+  ];
+
+  const toggleCheckbox = () => {
+    setIsChecked(!isChecked);
+    console.log(isChecked);
+  };
+
+  const handleSelectFirstFilter = (event) => {
+    setSelectedFirstFilter(event.target.value);
+  };
+  const handleSelectSecondFilter = (event) => {
+    setselectedSecondFilter(event.target.value);
+  };
+  const handleSelectThirdFilter = (event) => {
+    setselectedThirdFilter(event.target.value);
+  };
+  const handleSelectFourthFilter = (event) => {
+    setselectedFourthFilter(event.target.value);
+  };
+  const handleSelectFifthdFilter = (event) => {
+    setselectedFifthFilter(event.target.value);
+  };
 
   // Filter the data when valueToFind or DBdata changes
   useEffect(() => {
@@ -154,7 +239,9 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
         </section>
         <section className="table">
           <section className="table_header">
-            <p> {tableTitle}</p>
+            <section className="table_header_title">
+              <p> {tableTitle}</p>
+            </section>
             <section className="table-header-finder">
               <input
                 className="input-group"
@@ -163,7 +250,113 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
                 onChange={handleSearchInput}
               />
             </section>
+            <section className="table_header_filter_selector">
+              <input
+                type="checkbox"
+                id="myCheckbox"
+                checked={isChecked}
+                onChange={toggleCheckbox}
+              />
+              <label htmlFor="myCheckbox" className="checkboxLabel">
+                {} Agregar más filtros
+              </label>
+            </section>
           </section>
+          {isChecked ? (
+            <section className="table_filter_section">
+              <div className="first-filter">
+                <label htmlFor="options" className="input-label">
+                  Filtrar por:
+                </label>
+                <select
+                  id="options"
+                  value={selectedFirstFilter}
+                  onChange={handleSelectFirstFilter}
+                  className="input-name"
+                >
+                  <option value="Seleccione" selected disabled>
+                    Seleccione
+                  </option>
+                  {firstFilter.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="second-filter">
+                <select
+                  id="options"
+                  value={selectedSecondFilter}
+                  onChange={handleSelectSecondFilter}
+                  className="input-name"
+                >
+                  <option value="Seleccione" selected disabled>
+                    Seleccione
+                  </option>
+                  {secondFilter.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="third-filter">
+                <select
+                  id="options"
+                  value={selectedThirdFilter}
+                  onChange={handleSelectThirdFilter}
+                  className="input-name"
+                >
+                  <option value="Seleccione" selected disabled>
+                    Seleccione
+                  </option>
+                  {thirdFilter.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="third-filter">
+                <select
+                  id="options"
+                  value={selectedFourthFilter}
+                  onChange={handleSelectFourthFilter}
+                  className="input-name"
+                >
+                  <option value="Seleccione" selected disabled>
+                    Seleccione
+                  </option>
+                  {FourthFilter.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="third-filter">
+                <select
+                  id="options"
+                  value={selectedFifthFilter}
+                  onChange={handleSelectFifthdFilter}
+                  className="input-name"
+                >
+                  <option value="Seleccione" selected disabled>
+                    Seleccione
+                  </option>
+                  {FifthFilter.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </section>
+          ) : (
+            []
+          )}
+
           <section className="table_body">
             <table>
               <thead>
@@ -193,15 +386,21 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
                     </td>
                     <td>{item.Rut}</td>
                     {/* <td>{item.Nombres}</td> */}
-                    <td>{item.Nombres.charAt(0).toUpperCase() +item.Nombres.slice(1).toLowerCase() }</td>
+                    <td>
+                      {item.Nombres.charAt(0).toUpperCase() +
+                        item.Nombres.slice(1).toLowerCase()}
+                    </td>
                     <td>
                       {/* {item.ApellidoPaterno.charAt(0).toUpperCase() + item.ApellidoPaterno.slice(1).toLowerCase() } {item.ApellidoMaterno} */}
                       {item.ApellidoPaterno} {item.ApellidoMaterno}
                     </td>
                     <td>{item.FechaNacimiento}</td>
                     <td>{item.NumeroContacto}</td>
-                    <td>{item.Direccion}</td>
                     <td>{item.EstadoCivil}</td>
+                    <td>{item.RedAsignada}</td>
+                    <td>{item.GrupoIglesia}</td>
+                    <td>{item.EquipoTrabajo}</td>
+                    <td>{item.LugarOrigen}</td>
                     <td>{item.EstadoIglesia}</td>
                     <td>{item.EstadoActualizacion}</td>
                   </tr>
