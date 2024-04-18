@@ -7,8 +7,6 @@ const CardChartComponent = ({ CardChartData, id, header, text, text2 }) => {
  const cardLink =()=>{
   alert('clicked')
  }
-
- console.log(id);
   return (
     <>
       <section className="cc-container">

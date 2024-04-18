@@ -22,8 +22,6 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
   const [DBdata, setDBdata] = useState([]); // Variable utilizada para tener todos los registros como base y no consultar constantemente la BD
   const [DBdataCounter, setDBdataCounter] = useState([]); // Variable utilizada para tener todos los registros como base y no consultar constantemente la BD
 
-  console.log(DBEvento);
-
   useEffect(() => setDBdata(sampledata), []);
 
   // useEffect(() => {
@@ -86,56 +84,54 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
   const [isChecked, setIsChecked] = useState(false); // State to track checkbox state
 
   const firstFilter = [
-    "Todos los equipos",
-    "Director",
-    "Presidente",
-    "Vice-Presidente",
-    "Tesorero",
-    "SubTesorero",
-    "Secretario",
-    "SubSecretario",
+    { Name: "Todos", value:'' },
+    { Name: "Director", value: "Director" },
+    { Name: "Presidente", value: "Presidente" },
+    { Name: "Vice-Presidente", value: "Vice-Presidente" },
+    { Name: "SubTesorero", value: "SubTesorero" },
+    { Name: "Secretario", value: "Secretario" },
+    { Name: "SubSecretario", value: "SubSecretario" },
   ];
 
   const secondFilter = [
-    "Todas las redes",
-    "Director",
-    "Presidente",
-    "Vice-Presidente",
-    "Tesorero",
-    "SubTesorero",
-    "Secretario",
-    "SubSecretario",
+    { Name: "Todos", value: "" },
+    { Name: "Director", value: "Director" },
+    { Name: "Presidente", value: "Presidente" },
+    { Name: "Vice-Presidente", value: "Vice-Presidente" },
+    { Name: "SubTesorero", value: "SubTesorero" },
+    { Name: "Secretario", value: "Secretario" },
+    { Name: "SubSecretario", value: "SubSecretario" },
   ];
   const thirdFilter = [
-    "Todos los niveles",
-    "Pastores Principales",
-    "Pastores",
-    "Ancianos",
-    "Diáconos",
-    "Líderes",
-    "Sub-líderes",
-    "Ayudantes",
-    "Sin liderazgo",
+    { Name: "Todos", value: "" },
+    { Name: "Pastores Principales", value: "Pastores Principales" },
+    { Name: "Pastores", value: "Pastores" },
+    { Name: "Ancianos", value: "Ancianos" },
+    { Name: "Diáconos", value: "Diaconos" },
+    { Name: "Líderes", value: "Lideres" },
+    { Name: "Sub-líderes", value: "Sub-Lideres" },
+    { Name: "Ayudantes", value: "Ayudantes" },
+    { Name: "Sin liderazgo", value: "Sin liderazgo" },
   ];
   const FourthFilter = [
-    "Todos los grupos",
-    "Iver Kids",
-    "Iver Jóvenes",
-    "Iver Mujeres",
-    "Iver Varones",
- ];
+    { Name: "Todos", value: "" },
+    { Name: "Iver Kids", value: "Iver Kids" },
+    { Name: "Iver Jóvenes", value: "Iver Jóvenes" },
+    { Name: "Iver Mujeres", value: "Iver Mujeres" },
+    { Name: "Iver Varones", value: "Iver Varones" },
+  ];
+
   const FifthFilter = [
-    "IverChile",
-    "IverChile Central",
-    "Iver Talcahuano",
-    "Iver La Calera",
-    "Iver San Clemente",
-    "Iver Nancahua",
+    { Name: "Todos", value: "" },
+    { Name: "Iver Central", value: "Iver Central" },
+    { Name: "Iver Talcahuano", value: "Iver Talcahuano" },
+    { Name: "Iver La Calera", value: "Iver La Calera" },
+    { Name: "Iver San Clemente", value: "Iver San Clemente" },
+    { Name: "Iver Nancahua", value: "Iver Nancahua" },
   ];
 
   const toggleCheckbox = () => {
     setIsChecked(!isChecked);
-    console.log(isChecked);
   };
 
   const handleSelectFirstFilter = (event) => {
@@ -162,13 +158,24 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
       return;
     }
 
-    // If valueToFind is empty, set filteredArray to DBdata directly
-    if (!valueToFind) {
-      setFilteredArray(DBdata);
-      return; // Exit early to avoid unnecessary filtering
-    }
+    let searchString = null;
 
-    const searchString = valueToFind.toLowerCase();
+    // If valueToFind is empty, set filteredArray to DBdata directly
+    if (isChecked) {
+      searchString = ""
+      if (selectedFirstFilter) {searchString = selectedFirstFilter.toLowerCase()}
+      if (selectedSecondFilter) searchString = selectedSecondFilter.toLowerCase();
+      if (selectedThirdFilter) searchString = selectedThirdFilter.toLowerCase();
+      if (selectedFourthFilter) searchString = selectedFourthFilter.toLowerCase();
+      if (selectedFifthFilter) searchString = selectedFifthFilter.toLowerCase();
+    } else {
+      if (!valueToFind) {
+        setFilteredArray(DBdata);
+        return; // Exit early to avoid unnecessary filtering
+      }
+      searchString = valueToFind.toLowerCase();
+      console.log(searchString);
+    }
 
     // Filter DBdata based on the search string
     const filteredData = DBdata.filter((item) =>
@@ -180,7 +187,16 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
     );
 
     setFilteredArray(filteredData); // Update state with filtered array
-  }, [valueToFind, DBdata]); // Run this effect whenever valueToFind or DBdata changes
+  }, [
+    isChecked,
+    valueToFind,
+    DBdata,
+    selectedFirstFilter,
+    selectedSecondFilter,
+    selectedThirdFilter,
+    selectedFourthFilter,
+    selectedFifthFilter,
+  ]); // Run this effect whenever valueToFind or DBdata changes
 
   const handleSearchInput = (e) => {
     setvalueToFind(e.target.value);
@@ -273,13 +289,11 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
                   value={selectedFirstFilter}
                   onChange={handleSelectFirstFilter}
                   className="input-name"
+                  defaultValue="Seleccione Directorio"
                 >
-                  <option value="Seleccione" selected disabled>
-                    Seleccione
-                  </option>
                   {firstFilter.map((option, index) => (
-                    <option key={index} value={option}>
-                      {option}
+                    <option key={index} value={option.value}>
+                      {option.Name}
                     </option>
                   ))}
                 </select>
@@ -295,8 +309,8 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
                     Seleccione
                   </option>
                   {secondFilter.map((option, index) => (
-                    <option key={index} value={option}>
-                      {option}
+                    <option key={index} value={option.value}>
+                      {option.Name}
                     </option>
                   ))}
                 </select>
@@ -312,8 +326,8 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
                     Seleccione
                   </option>
                   {thirdFilter.map((option, index) => (
-                    <option key={index} value={option}>
-                      {option}
+                    <option key={index} value={option.value}>
+                      {option.Name}
                     </option>
                   ))}
                 </select>
@@ -329,8 +343,8 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
                     Seleccione
                   </option>
                   {FourthFilter.map((option, index) => (
-                    <option key={index} value={option}>
-                      {option}
+                    <option key={index} value={option.value}>
+                      {option.Name}
                     </option>
                   ))}
                 </select>
@@ -346,8 +360,8 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
                     Seleccione
                   </option>
                   {FifthFilter.map((option, index) => (
-                    <option key={index} value={option}>
-                      {option}
+                    <option key={index} value={option.value}>
+                      {option.Name}
                     </option>
                   ))}
                 </select>
@@ -398,7 +412,7 @@ const LGTableComponent = ({ tableTitle, tableHeaders, tableData }) => {
                     <td>{item.NumeroContacto}</td>
                     <td>{item.EstadoCivil}</td>
                     <td>{item.RedAsignada}</td>
-                    <td>{item.GrupoIglesia}</td>
+                    <td>{item.GrupoAsignado}</td>
                     <td>{item.EquipoTrabajo}</td>
                     <td>{item.LugarOrigen}</td>
                     <td>{item.EstadoIglesia}</td>
