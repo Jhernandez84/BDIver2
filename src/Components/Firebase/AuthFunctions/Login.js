@@ -1,6 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import UserContext from '../Context/User/UserContext';
-import { db } from '../Firebase/firebase'; // Import your Firestore instance.
+// import UserContext from '../Context/User/UserContext';
+import { db } from "../../Firebase/firebase";
+import { auth, provider } from '../firebase'
+
+
+// import { db } from '../Firebase/firebase'; // Import your Firestore instance.
 
 const GetUserPrivileges = ({ authUser }) => {
   const { user, setUser } = useContext(UserContext);
