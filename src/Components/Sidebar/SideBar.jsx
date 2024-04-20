@@ -18,9 +18,12 @@ import {
 import "../Sidebar/styles.css";
 
 import React, { useState, useEffect } from "react";
+import { useContext } from "react";
+import { AuthContext } from "@/Context/UserContext";
 
 const SideBarComponent = ({ children }) => {
   const [showSideBar, setShowSideBar] = useState(false);
+  const { authUser, signInWithGoogle, signOut } = useContext(AuthContext);
   // const [sideBarWidth, setSideBarWidth] = useState("100px");
 
   useEffect(() => {
@@ -118,8 +121,9 @@ const SideBarComponent = ({ children }) => {
           ))}
           <section className="sidebar-account-settings">
             <img
-              src="https://t3.ftcdn.net/jpg/06/17/13/26/360_F_617132669_YptvM7fIuczaUbYYpMe3VTLimwZwzlWf.jpg"
+              src={authUser.photoURL}
               alt=""
+              onClick={signOut}
             />
             <div className="sidebar-account-settings-drkMode">
               <HiSun style={{ fontSize: iconSize }} />
