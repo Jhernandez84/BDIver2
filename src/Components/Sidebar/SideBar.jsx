@@ -14,6 +14,7 @@ import {
   HiSun,
   HiMoon,
 } from "react-icons/hi";
+import Tooltip from "../Tooltips/Tooptip";
 
 import "../Sidebar/styles.css";
 
@@ -33,7 +34,6 @@ const SideBarComponent = ({ children }) => {
   const toggleShowSideBar = () => {
     setShowSideBar((prevShowSideBar) => !prevShowSideBar);
     setSidebarCollapsed((previsSidebarCollapsed) => !previsSidebarCollapsed);
-    console.log(showSideBar);
   };
 
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -94,9 +94,8 @@ const SideBarComponent = ({ children }) => {
               ? "collapsed-sidebar side-bar"
               : "expanded-sidebar side-bar"
           }
-          onMouseOver={() => (setShowSideBar(true), setSidebarCollapsed(false))}
-          onMouseLeave={() => (setShowSideBar(false), setSidebarCollapsed(true)
-          )}
+          // onMouseOver={() => (setShowSideBar(true), setSidebarCollapsed(false))}
+          // onMouseLeave={() => (setShowSideBar(false), setSidebarCollapsed(true))}
         >
           <section className="sidebar-logo-section">
             <img
@@ -112,7 +111,8 @@ const SideBarComponent = ({ children }) => {
                 <Link href={item.SBRout} className="sidebar-link-content">
                   {/* debe estar en 2 columnas */}
                   <div className="sidebar-link-main-content">
-                    <div className="sidebar-content-icon"> {item.SBIcon}</div>
+                    {/* <div className="sidebar-content-icon"> {item.SBIcon}</div> */}
+                    <div className="sidebar-content-icon">{item.SBIcon}</div>
                     <div className="sidebar-content-text">{item.SBMenu}</div>
                   </div>
                 </Link>
@@ -120,11 +120,7 @@ const SideBarComponent = ({ children }) => {
             </>
           ))}
           <section className="sidebar-account-settings">
-            <img
-              src={authUser.photoURL}
-              alt=""
-              onClick={signOut}
-            />
+            <img src={authUser.photoURL} alt="salir" onClick={signOut} />
             <div className="sidebar-account-settings-drkMode">
               <HiSun style={{ fontSize: iconSize }} />
               {/* <HiMoon style={{ fontSize: iconSize }} /> */}

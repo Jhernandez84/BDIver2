@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 import { AuthProvider } from "@/Context/UserContext";
 import { AuthContext } from "@/Context/UserContext";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -30,28 +31,15 @@ export default function RootLayout({ children }) {
 
 function LayoutContent({ children }) {
   const { authUser, signInWithGoogle, signOut } = useContext(AuthContext);
+  // const router = useRouter();
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(true);
   // const [selectedPage, setSelectedPage] = useState(null);
 
   console.log("User data:", authUser);
 
-  // const handleSidebarLinkClick = (page) => {
-  //   setSelectedPage(page);
-  //   // Optionally, you can collapse the sidebar after a link is clicked
-  //   setSidebarCollapsed(true);
-  // };
-
-  // let SelectedPageComponent = null;
-  // switch (selectedPage) {
-  //   case "home":
-  //     SelectedPageComponent = Home;
-  //     break;
-  //   case "calendar":
-  //     SelectedPageComponent = Calendar;
-  //     break;
-  //   default:
-  //     break;
-  // }
+  // {
+  //   authUser ? router.push("/dashboard") : router.push("/home");
+  // } // Navigates to the /dashboard page
 
   return (
     <>
